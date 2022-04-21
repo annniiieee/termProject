@@ -22,14 +22,7 @@ abstract class Book {
         this.publisher = publisher;
         this.year = year;
         counter++; 
-        if (bookId == -1) {
-            bookId = counter;
-            
-        }
-        else{
-            bookId = bookId; 
-        }
-    }
+        this.id = counter;
 
     public Book(String name, String author, String genre, String publisher, int year) {
         this.name = name;
