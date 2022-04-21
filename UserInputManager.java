@@ -11,7 +11,7 @@ package library;
  */
 public class UserInputManager {
     
-    public static int getId(){
+    public static int getuserId(){
         Scanner sc = new Scanner(System.in);
         System.out.print("What is your id? " );
         int a = 0;
