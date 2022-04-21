@@ -1,5 +1,6 @@
-package library;
-public class Admin {
+package termproject;
+
+public class People {
     protected int id; 
     protected String password;
     protected String name; 
@@ -7,7 +8,7 @@ public class Admin {
     static int counter; 
     protected double salary; 
 
-    public admin(int id, String password, String name, String address, double salary) {
+    public People(int id, String password, String name, String address, double salary) {
         counter++; 
         this.id = counter;
         this.password = password;
@@ -65,5 +66,3 @@ public class Admin {
     
 }
 
-    
-}
