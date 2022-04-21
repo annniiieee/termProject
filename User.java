@@ -10,7 +10,7 @@ public class User {
     protected String address;
     static int counter = 0;
 
-    public User(int idNum, String password, String lastName, String firstName, String address) {
+    public User(String password, String lastName, String firstName, String address) {
         counter++;
         this.id = counter;
         this.password = password;
