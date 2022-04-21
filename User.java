@@ -1,4 +1,4 @@
-public class user {
+public class User {
 
     protected int id;
     protected String password;
