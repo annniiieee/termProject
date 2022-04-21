@@ -40,7 +40,7 @@ public class UserInputManager {
         String f = getFirstName();
         String l = getLastName();
         String a = getAddress();
-        return new User(User.getCurrentId(), createPassword(), l, f, a);
+        return new User(createPassword(), l, f, a);
     }
     
     public String getFirstName(){
