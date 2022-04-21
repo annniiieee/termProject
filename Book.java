@@ -13,12 +13,22 @@ abstract class Book {
     public String name, author, genre, publisher;
     public int year;
     public static int counter;
+    public int bookId; 
     
-    public Book(String name, String author, String publisher, int year) {
+    
+    public Book(String name, String author, String publisher, int year, int bookId) {
         this.name = name;
         this.author = author;
         this.publisher = publisher;
         this.year = year;
+        counter++; 
+        if (bookId == -1) {
+            bookId = counter;
+            
+        }
+        else{
+            bookId = bookId; 
+        }
     }
 
     public Book(String name, String author, String genre, String publisher, int year) {
