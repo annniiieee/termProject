@@ -1,3 +1,6 @@
+package termproject;
+//student 
+
 public class User {
 
     protected int id;
@@ -9,7 +12,7 @@ public class User {
 
     public User(int idNum, String password, String lastName, String firstName, String address) {
         counter++;
-        this.id = currentId;
+        this.id = counter;
         this.password = password;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -57,12 +60,12 @@ public class User {
         this.address = address;
     }
 
-    public static int getCurrentId() {
-        return currentId;
+    public static int getCounter() {
+        return counter;
     }
 
-    public static void setCurrentId(int currentId) {
-        User.currentId = currentId;
+    public static void setCounter(int counter) {
+        User.counter = counter;
     }
 
     public void printInfo() {
