@@ -69,9 +69,10 @@ public class User {
     }
 
     public void printInfo() {
-        System.out.println("The details of this user are: \n");
+        System.out.println("The details of this user are: ");
         System.out.println("Name: " + lastName + ", " + firstName);
         System.out.println("Address: " + address);
+        System.out.println("Id: " + id);        
     }
 
 }
