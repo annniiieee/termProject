@@ -5,16 +5,16 @@ public class User {
     protected String lastName;
     protected String firstName;
     protected String address;
-    static int currentId = 0;
+    static int counter = 0;
 
     public User(int idNum, String password, String lastName, String firstName, String address) {
-        currentId++;
+        counter++;
         this.id = currentId;
         this.password = password;
         this.lastName = lastName;
         this.firstName = firstName;
         this.address = address;
-        currentId++;
+
     }
 
     public int getId() {
