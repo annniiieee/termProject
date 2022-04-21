@@ -8,20 +8,14 @@ public class user {
     static int currentId = 0;
 
     public user(int idNum, String password, String lastName, String firstName, String address) {
-        this.id = idNum;
+        currentId++;
+        this.id = currentId;
         this.password = password;
         this.lastName = lastName;
         this.firstName = firstName;
         this.address = address;
         currentId++;
-        if (idNum == -1) {
-            id = currentId;
-
-        } else {
-            id = idNum;
-        }
-
-    }
+ 
 
     public int getId() {
         return id;
