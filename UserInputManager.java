@@ -11,4 +11,23 @@ package library;
  */
 public class UserInputManager {
     
+    public static int getId(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("What is your id? " );
+        int a = 0;
+        try {
+            a = sc.nextInt();
+        } catch (Exception e) {
+            System.out.println("Invalid Id. Please input a number.");
+            a = getId();
+        }
+        return a;
+    }
+    
+    public static String getPassWord(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Password: ");
+        System.out.println("");
+        return sc.nextLine();        
+    }    
 }
