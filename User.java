@@ -7,7 +7,7 @@ public class User {
     protected String address;
     static int currentId = 0;
 
-    public user(int idNum, String password, String lastName, String firstName, String address) {
+    public User(int idNum, String password, String lastName, String firstName, String address) {
         currentId++;
         this.id = currentId;
         this.password = password;
@@ -15,7 +15,7 @@ public class User {
         this.firstName = firstName;
         this.address = address;
         currentId++;
- 
+    }
 
     public int getId() {
         return id;
@@ -62,7 +62,7 @@ public class User {
     }
 
     public static void setCurrentId(int currentId) {
-        user.currentId = currentId;
+        User.currentId = currentId;
     }
 
     public void printInfo() {
