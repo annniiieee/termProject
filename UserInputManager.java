@@ -26,7 +26,7 @@ public class UserInputManager {
     
     public static String getPassWord(){
         Scanner sc = new Scanner(System.in);
-        System.out.print("Password: ");
+        System.out.print("What is your password? ");
         System.out.println("");
         return sc.nextLine();        
     }    
