@@ -78,11 +78,17 @@ public class UserInputManager {
     
     public String createPassword(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Please input a password.");
+        System.out.print("Please input a password.");
         String password = sc.nextLine();
-        while (password.equals("")) {            
-            System.out.println("Empty address. Please input a address.");
-            password = sc.nextLine();
+        int counter = 0;
+        for (int i = 0; i < password.length(); i++) {
+            if (password.substring(i, i+1).equals(" ")) {
+                counter++;
+            }             
+        }
+        if (counter > 0) {
+            System.out.println("Password containts invalid characters (Spaces).");
+            return createPassword();            
         }
         return password;          
     }
