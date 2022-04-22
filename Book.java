@@ -1,16 +1,72 @@
 package termproject;
 
-
 abstract class Book {
+
     public String name, author, genre, publisher;
     public int year;
     public static int counter;
-    public int bookId; 
-        protected String dateBorrowed;
+    public int bookId;
+    protected String dateBorrowed;
 
     protected String dateReturned;
     public int fine;
     public String fineStatus;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public static int getCounter() {
+        return counter;
+    }
+
+    public static void setCounter(int counter) {
+        Book.counter = counter;
+    }
+
+    public int getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
 
     public String getDateBorrowed() {
         return dateBorrowed;
@@ -48,7 +104,7 @@ abstract class Book {
         double finePerDay = 0.20d;
         //date :     dd/mm/yyyy
 
-        int[] daysOfMonths = {0,31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int[] daysOfMonths = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
         int daysBorrowed = Integer.valueOf(dateBorrowed.substring(0, 2));
         int monthsB = Integer.valueOf(dateBorrowed.substring(3, 5));
@@ -82,14 +138,12 @@ abstract class Book {
         return (double) (fineDays * finePerDay);
     }
 
-    
-    
     public Book(String name, String author, String publisher, int year, int bookId) {
         this.name = name;
         this.author = author;
         this.publisher = publisher;
         this.year = year;
-        counter++; 
+        counter++;
         this.bookId = counter;
     }
 
@@ -101,11 +155,17 @@ abstract class Book {
         this.year = year;
     }
 
-    
-
     public Book(String genre) {
         this.genre = genre;
     }
-    
-    
+
+    public void printBook() {
+        System.out.println(getName() + "by " + getAuthor()
+                + "\nGenre: " + getGenre()
+                + "\nPublisher: " + getPublisher()
+                + "\nYear: " + getYear()
+                + "\nBook Id: " + getBookId());
+    }
+
 }
+
