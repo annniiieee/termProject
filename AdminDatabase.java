@@ -12,35 +12,25 @@ import java.util.Map;
  *
  * @author Admin
  */
-public class AdminDatabase {
-    private HashMap<Integer, Admin> h = new HashMap<>();
+public class AdminDatabase extends Database{
 
     public AdminDatabase() {
         HashMap<Integer, Admin> h = new HashMap<>();
     }    
-
-    public HashMap<Integer, Admin> getH() {
-        return h;
+    
+    public void addAdmin(Admin a){
+        h.put(a.getId(), a);
     }
 
-    public void setH(HashMap<Integer, Admin> h) {
-        this.h = h;
-    }
-    
-    public void printUser(){
-        System.out.println("The User list is: ");
-        for (Map.Entry<Integer, Admin> entry: h.entrySet()) {
-            entry.getValue().printInfo();
-        }
-    }  
-    
-    public Admin getUser(int id){
+    public Admin getAdmin(int id){
         Admin a = null;
-        for (Map.Entry<Integer, Admin> entry : h.entrySet()) {
+        for (Map.Entry<Integer, People> entry : h.entrySet()) {
             if (entry.getKey()== id) {
                 a = (Admin) entry.getValue();
             }
         }   
         return a;
     }        
+    
+    
 }

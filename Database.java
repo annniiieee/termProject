@@ -17,11 +17,6 @@ public class Database {
     HashMap<Integer, People> h = new HashMap<>();
 
     public Database() {
-        HashMap<Integer, People> h = new HashMap<>();
-    }
-    
-    public void addPerson(User u){
-        h.put(u.getId(), u);
     }
     
     public void removePeople(int id){
@@ -38,7 +33,7 @@ public class Database {
         }
     }
     
-    public void changePassword(User u){
+    public void changePassword(People u){
         UserInputManager UIM = new UserInputManager();
         Scanner sc = new Scanner(System.in);
         int userId = UIM.getId();
@@ -48,7 +43,7 @@ public class Database {
         h.get(userId).setPassword(UIM.getNewPassword());
     }
     
-    public boolean checkIdExistence(int id){
+    public boolean checkIdExistence(int id, HashMap<Integer, People> h){
         if (h.containsKey(id)) {
             return true;
         }
@@ -65,7 +60,7 @@ public class Database {
     
     public boolean checkLoginCredentials(int userId){
         UserInputManager UIM = new UserInputManager();
-        while (!checkIdExistence(userId)) {            
+        while (!checkIdExistence(userId, h)) {            
             System.out.println("Invalid user id. Please enter a valid id, or enter 0 to exit the process");
             userId = UIM.getId();
             if (userId == 0) {
