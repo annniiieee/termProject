@@ -5,6 +5,8 @@
  */
 package library;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Admin
@@ -43,6 +45,13 @@ public class UserInputManager {
         return new User(createPassword(), l, f, a);
     }
     
+    public Admin createAdmin(){
+        String f = getFirstName();
+        String l = getLastName();
+        String a = getAddress();
+        return new Admin(createPassword(), l, f, a);
+    }    
+    
     public String getFirstName(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Please input your first name. ");
@@ -80,13 +89,7 @@ public class UserInputManager {
         Scanner sc = new Scanner(System.in);
         System.out.print("Please input a password.");
         String password = sc.nextLine();
-        int counter = 0;
-        for (int i = 0; i < password.length(); i++) {
-            if (password.substring(i, i+1).equals(" ")) {
-                counter++;
-            }             
-        }
-        if (counter > 0) {
+        if (password.contains(" ")) {
             System.out.println("Password containts invalid characters (Spaces).");
             return createPassword();            
         }
@@ -108,30 +111,42 @@ public class UserInputManager {
         }
     }
     
-    public int displayUserOption(){
+    public int displayLogInMainMenu(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to library inc.! What would you like to do today? "
-                         + "\n1. Create a new user." 
+                         + "\n1. Log in as user." 
+                         + "\n2. Log in as admin." 
+                         + "\n3. Create a new user." 
+                         + "\n4. Change a new admin."
+                         + "\n0. End session.");        
+        return sc.nextInt();
+    }
+    
+    public int displayUserOption(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("What would you like to do today? "
+                         + "\n1. View profile."
                          + "\n2. Change a password." 
                          + "\n3. Borrow a book." 
                          + "\n4. Return a book."
                          + "\n5. Search a book."
-                         + "\n6. View and pay fees.");
+                         + "\n6. View and pay fees."
+                         + "\n0. Log out.");
         return sc.nextInt();
     }
     
     public int displayAdminOption(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Welcome to library inc.! What would you like to do today? "
-                         + "\n1. Create a new admin account." 
-                         + "\n2. Change an admin password." 
+        System.out.println("What would you like to do today? "
+                         + "\n1. View profile."
+                         + "\n2. Change your password." 
                          + "\n3. Search a book." 
                          + "\n4. Add a book."
                          + "\n5. Delete a book."
-                         + "\n6. Search a user's information."
+                         + "\n6. View a user's profile."
                          + "\n7. Delete a user."
-                         + "\n8. View a user's loans and fees.");        
+                         + "\n8. View a user's loans and fees."
+                         + "\n0. Log out.");        
         return sc.nextInt();
     }
-
 }

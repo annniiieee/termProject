@@ -1,28 +1,28 @@
-package termproject;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package library;
 
+/**
+ *
+ * @author Admin
+ */
 public class People {
     protected int id; 
     protected String password;
-    protected String name; 
+    protected String firstName; 
+    protected String lastName; 
     protected String address; 
-    static int counter; 
-    protected double salary; 
+    private static int counter; 
 
-    public People(int id, String password, String name, String address, double salary) {
-        counter++; 
-        this.id = counter;
+    public People(String password, String lastName, String firstName, String address) {
         this.password = password;
-        this.name = name;
+        this.lastName = lastName;
+        this.firstName = firstName;
         this.address = address;
-        this.salary = salary; 
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
+        counter++;
     }
 
     public int getId() {
@@ -41,12 +41,20 @@ public class People {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getAddress() {
@@ -59,10 +67,12 @@ public class People {
 
     public static int getCounter() {
         return counter;
+    }    
+    
+    public void printInfo() {
+        System.out.println("Person Id: " + id);
+        System.out.println("Name: " + lastName + ", " + firstName);
+        System.out.println("Address: " + address);
+        System.out.println("Password: " + password);
     }
-
- 
-    
-    
 }
-
