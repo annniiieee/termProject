@@ -1,23 +1,19 @@
-package termproject;
-//student 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package library;
 
-public class User {
-
-    protected int id;
-    protected String password;
-    protected String lastName;
-    protected String firstName;
-    protected String address;
-    static int counter = 0;
+/**
+ *
+ * @author Admin
+ */
+public class User extends People {
 
     public User(String password, String lastName, String firstName, String address) {
-        counter++;
-        this.id = counter;
-        this.password = password;
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.address = address;
-
+        super(password, lastName, firstName, address);
+        this.id = getCounter();
     }
 
     public int getId() {
@@ -60,19 +56,11 @@ public class User {
         this.address = address;
     }
 
-    public static int getCounter() {
-        return counter;
-    }
-
-    public static void setCounter(int counter) {
-        User.counter = counter;
-    }
-
+    @Override
     public void printInfo() {
-        System.out.println("The details of this user are: ");
+        System.out.println("User Id: " + id);
         System.out.println("Name: " + lastName + ", " + firstName);
         System.out.println("Address: " + address);
-        System.out.println("Id: " + id);        
-    }
-
+        System.out.println("Password: " + password);
+    }       
 }
