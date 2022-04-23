@@ -23,7 +23,7 @@ public class Library {
             switch(mainMenuOption){    
                 case 1:
                     int userSessionId = UIM.getId();
-                    if (UD.checkLoginCredentials(userSessionId)) {
+                    if (AD.checkLoginCredentials(userSessionId)) {
                     int userOption = 0;                    
                     do {                            
                     boolean userSuccess = false;
@@ -40,7 +40,7 @@ public class Library {
                                         UD.getUser(userSessionId).printInfo();
                                     break;
                                 case 2:
-                                        UD.changePassword(UD.getUser(userSessionId));
+                                        UD.changePassword((User) UD.getUser(userSessionId));
                                     break;
                                 case 3:
                                     break;
@@ -63,15 +63,17 @@ public class Library {
                     break;
 
                 case 2:
+                    int adminSessionId = UIM.getId();
+                    if (AD.checkLoginCredentials(adminSessionId)) {
                         int adminOption = 0;
                         do {                            
                             adminOption = UIM.displayAdminOption();    
                             switch(adminOption){
                                 case 1:
-                                        //UD.getUser().printInfo();
+                                        AD.getAdmin(adminSessionId).printInfo();
                                     break;
                                 case 2:
-                                        //UD.changePassword(UD.getUser());
+                                        AD.changePassword((Admin) AD.getAdmin(adminSessionId));
                                     break;
                                 case 3:
                                     break;
@@ -80,8 +82,14 @@ public class Library {
                                 case 5:
                                     break;
                                 case 6:
+                                    //have to add security measures
+                                    //int id = UIM.getId();
+                                    //UD.getUser(id).printInfo();
                                     break;
                                 case 7:
+                                    //have to add security measures
+                                    //UD.removeUser(UIM.getId());
+                                    //System.out.println("User has been removed.");
                                     break;
                                 case 8:
                                     break;
@@ -92,7 +100,8 @@ public class Library {
                                     System.out.println("Invalid option. Please input a number between 0 and 8.");
                                     break;
                             }
-                        } while (adminOption != 0);                    
+                        } while (adminOption != 0);                           
+                    }
                     break;
 
 
@@ -103,10 +112,10 @@ public class Library {
                     u.printInfo();
                     break;
                 case 4:
-                   // Admin a = UIM.createUser();
-                    //AD.addAdmin(a);
-                    System.out.println("User created!");
-                   // u.printInfo();
+                    Admin a = (Admin) UIM.createAdmin();
+                    AD.addAdmin(a);
+                    System.out.println("Admin created!");
+                    a.printInfo();
                     break;
                 case 0:
                     System.out.println("Thank you for using library inc.! ");
@@ -120,4 +129,3 @@ public class Library {
     }
     
 }
-
