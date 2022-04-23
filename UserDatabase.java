@@ -7,7 +7,6 @@ package library;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 /**
  *
  * @author Admin
@@ -18,12 +17,9 @@ public class UserDatabase extends Database{
         HashMap<Integer, User> h = new HashMap<>();        
     }
     
-    public void printUser(){
-        System.out.println("The User list is: ");
-        for (Map.Entry<Integer, People> entry: h.entrySet()) {
-            entry.getValue().printInfo();
-        }
-    }  
+    public void addUser(User u){
+        h.put(u.getId(), u);
+    }
     
     public User getUser(int id){
         User u = null;
@@ -35,4 +31,10 @@ public class UserDatabase extends Database{
         return u;
     }    
     
+    public void removeUser(int id){
+        if (h.containsKey(id)) {
+            h.remove(id);        
+        }
+        System.out.println("Id does not exist.");
+    }
 }
