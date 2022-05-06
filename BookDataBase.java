@@ -3,14 +3,15 @@ package termproject;
 
 import java.util.*;
 
-public class bookDatabase {
+public class BookDataBase {
+    
     Map<Integer, Book> linkedHashMap = new LinkedHashMap<>();
+    
     public void addBook (Book book){
         linkedHashMap.put(book.bookId, book);
-        
     }
 
-    public bookDatabase() {
+    public BookDataBase() {
         Map<Integer, Book> linkedHashMap = new LinkedHashMap<>();        
     }
 
@@ -18,8 +19,7 @@ public class bookDatabase {
     
     public void removeBook(int id){
         if (linkedHashMap.isEmpty()) {
-            System.out.println("Empty book base");
-            
+            System.out.println("Empty library");            
         }
         else{
             for (Map.Entry<Integer,Book> entry : linkedHashMap.entrySet()) {
@@ -40,14 +40,17 @@ public class bookDatabase {
         }
     }
     
-
-    
     public void printBooks(){
-        System.out.println("The book list: ");
-        for (Map.Entry<Integer,Book> entry : linkedHashMap.entrySet()){
-            entry.getValue().printBook();
+        if (linkedHashMap.isEmpty()) {
+            System.out.println("Emppty book list.");
         }
-    }
-    
-    
+        else{
+            System.out.println("The book list: ");
+            int j = 0;
+            for (Map.Entry<Integer,Book> entry : linkedHashMap.entrySet()){
+                System.out.print(j++ + "- ");
+                entry.getValue().printBook();
+            }        
+        }
+    }    
 }

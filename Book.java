@@ -12,6 +12,9 @@ abstract class Book {
     public int fine;
     public String fineStatus;
 
+    public static String[] g = {"Manga", "Novel", "Comicbook", "Documentary"};
+    
+    
     public String getName() {
         return name;
     }
@@ -138,21 +141,12 @@ abstract class Book {
         return (double) (fineDays * finePerDay);
     }
 
-    public Book(String name, String author, String publisher, int year, int bookId) {
+    public Book(String name, String author, String publisher, int year) {
         this.name = name;
         this.author = author;
         this.publisher = publisher;
         this.year = year;
         counter++;
-        this.bookId = counter;
-    }
-
-    public Book(String name, String author, String genre, String publisher, int year) {
-        this.name = name;
-        this.author = author;
-        this.genre = genre;
-        this.publisher = publisher;
-        this.year = year;
     }
 
     public Book(String genre) {
@@ -160,7 +154,7 @@ abstract class Book {
     }
 
     public void printBook() {
-        System.out.println(getName() + "by " + getAuthor()
+        System.out.println(getName() + " by " + getAuthor()
                 + "\nGenre: " + getGenre()
                 + "\nPublisher: " + getPublisher()
                 + "\nYear: " + getYear()

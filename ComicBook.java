@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package library;
+package termproject;
 
 /**
  *
@@ -11,10 +11,10 @@ package library;
  */
 public class ComicBook extends Book{
 
-    public ComicBook(String name, String author, String genre, String publisher, int year) {
-        super(name, author, genre, publisher, year);
-        this.genre = "ComicBook";
-        counter++;
-    }
+    public ComicBook(String name, String author, String publisher, int year) {
+        super(name, author, publisher, year);
+        this.genre = "Comicbook";
+        this.bookId = counter;
+    }  
     
 }

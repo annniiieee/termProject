@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package library;
+package termproject;
 
 /**
  *
  * @author Admin
  */
 public class Novel extends Book{
-    public Novel(String name, String author, String genre, String publisher, int year) {
-        super(name, author, genre, publisher, year);
+    public Novel(String name, String author, String publisher, int year) {
+        super(name, author, publisher, year);
         this.genre = "Novel";
-        counter++;
-    }    
+        this.bookId = counter;
+    }   
 }
