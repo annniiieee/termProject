@@ -1,6 +1,7 @@
 package library;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 public class BookDataBase {
@@ -22,27 +23,13 @@ public class BookDataBase {
 
     public boolean checkBookExistence(int id) {
         if (bookData.containsKey(id)) {
-            System.out.println("The book is available.");
             return true;
-           
 
         } else {
-            System.out.println("The book is unavailable.");
             return false;
         }
     }
 
-    public boolean checkSearchBook (Book book){
-        if (bookData.containsValue(book)) {
-            System.out.println("The book is available.");
-            return true; 
-            
-        }
-        else {
-            System.out.println("The book is unavailable.");
-            return false; 
-        }
-    }
     public void printBooks() {
         if (bookData.isEmpty()) {
             System.out.println("Empty book list.");
@@ -57,7 +44,6 @@ public class BookDataBase {
     }
 
     public Map<Integer, Book> search(String query) {
-      
         return this.bookData.keySet().stream().filter(
                 id
                 -> Arrays.stream(
@@ -71,6 +57,5 @@ public class BookDataBase {
         );
 
     }
-
 
 }

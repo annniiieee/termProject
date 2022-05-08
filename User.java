@@ -6,17 +6,21 @@
 package library;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Admin
  */
 public class User extends People {
-    ArrayList <Book> borrowedBooks = new ArrayList <>(); 
+
+    ArrayList<Book> bookList;
 
     public User(String password, String lastName, String firstName, String address) {
         super(password, lastName, firstName, address);
         this.id = getCounter();
+        bookList = new ArrayList<>();
     }
 
     public int getId() {
@@ -65,5 +69,11 @@ public class User extends People {
         System.out.println("Name: " + lastName + ", " + firstName);
         System.out.println("Address: " + address);
         System.out.println("Password: " + password);
-    }       
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }

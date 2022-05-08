@@ -12,8 +12,33 @@ public abstract class Book {
     protected String dateReturned;
     public int fine;
     public String fineStatus;
+    public boolean available = true;
 
     public static String[] g = {"Manga", "Novel", "Comicbook", "Documentary"};
+
+    public String[] getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String[] keyword) {
+        this.keyword = keyword;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public static String[] getG() {
+        return g;
+    }
+
+    public static void setG(String[] g) {
+        Book.g = g;
+    }
     
     
     public String getName() {
@@ -166,7 +191,7 @@ public abstract class Book {
 
     @Override
     public String toString() {
-        return "Book{" + "name=" + name + ", author=" + author + ", genre=" + genre + ", publisher=" + publisher + ", year=" + year + ", bookId=" + bookId + ", dateBorrowed=" + dateBorrowed + ", dateReturned=" + dateReturned + ", fine=" + fine + ", fineStatus=" + fineStatus + '}';
+        return "Book{" + "Title: " + name + ", Author: " + author + ", Genre: " + genre + ", Publisher: " + publisher + ", Year: " + year + ", Books'Id: " + bookId + ", Date Borrowed: " + dateBorrowed + ", Date returned/To be returned: " + dateReturned + ", Fine:  " + fine + ", Fine'status: " + fineStatus + '}';
     }
 
 }

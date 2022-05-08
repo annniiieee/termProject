@@ -1,12 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package library;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Date;
 
 /**
  *
@@ -16,16 +14,29 @@ public class Library {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.InterruptedException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+
         // TODO code application logic here
         UserInputManager UIM = new UserInputManager();
         UserDatabase UD = new UserDatabase();
         AdminDatabase AD = new AdminDatabase();
         BookDataBase BD = new BookDataBase();
-        Scanner sc = new Scanner (System.in); 
+
         int mainMenuOption = 0;
-        
+
+        BD.addBook(new ComicBook("Marvel", "", "", 100, ""));
+
+        BD.addBook(new ComicBook("BestBook", "", "", 100, ""));
+        BD.addBook(new ComicBook("frank", "", "", 100, ""));
+        BD.addBook(new ComicBook("kevin", "", "", 100, ""));
+        BD.addBook(new ComicBook("samuel", "samuel", "samuel", 100, "samuel"));
+        BD.addBook(new ComicBook("com", "", "", 100, ""));
+        BD.addBook(new ComicBook("asd", "", "", 100, ""));
+        BD.addBook(new ComicBook("pop", "", "", 100, ""));
+        BD.addBook(new ComicBook("hey", "", "", 100, ""));
+
         do {
             boolean success = false;
             while (!success) {
@@ -38,8 +49,10 @@ public class Library {
             }
 
             switch (mainMenuOption) {
+
                 case 1:
                     int userSessionId = UIM.getId();
+                    User user = UD.getUser(userSessionId);
                     if (UD.checkLoginCredentials(userSessionId)) {
                         int userOption = 0;
                         do {
@@ -52,49 +65,87 @@ public class Library {
                                     System.out.println("Please input a number.");
                                 }
                             }
+
                             switch (userOption) {
                                 case 1:
                                     UD.getUser(userSessionId).printInfo();
+                                    Thread.sleep(100);
                                     break;
+
                                 case 2:
                                     UD.changePassword(UD.getUser(userSessionId));
                                     break;
                                 case 3:
-                                    //borrow book
-                                    System.out.println("Enter the ID of the book you would like to borrow: ");
-                                    String y = sc.nextLine(); 
-                                    BD.checkBookExistence(userOption);
+
+                                    int id = UIM.getBookId();
+                                    LocalDate date = LocalDate.now(); 
+                                          LocalDate  dateReturn = LocalDate.now().plusDays(14); 
+                                    Book book = BD.bookData.get(id);
+                                    if (book.available == true) {
+                                        book.setAvailable(false);
+                                        user.bookList.add(book);
+                                        System.out.println("Succesfully borrowed");
+                                        book.setDateBorrowed(String.valueOf(date));
+                                        System.out.println("The book was borrows on: " + book.getDateBorrowed());
+                                        book.setDateReturned(String.valueOf(dateReturn));
+                                        System.out.println("To be returned: " + book.getDateReturned());
+                                        Thread.sleep(100);
+                                    } else {
+                                        System.err.println("Book not available");
+                                        Thread.sleep(100);
+
+                                    }
+
                                     break;
                                 case 4:
-                                    //return book
-                                    
-                                    
-                                    
+                                    int id2 = UIM.getBookId();
+                                    Book book2 = BD.bookData.get(id2);
+                                    boolean exist = false;
+
+                                    for (int i = 0; i < user.bookList.size(); i++) {
+                                        if (book2.equals(user.bookList.get(i))) {
+                                            exist = true;
+                                        }
+                                    }
+
+                                    if (exist) {
+
+                                        user.bookList.remove(book2);
+                                        book2.setAvailable(true);
+                                    } else {
+
+                                        System.err.println("You have not borrowed this book");
+                                        Thread.sleep(100);
+
+                                    }
                                     break;
                                 case 5:
                                     //search a book
-                                    System.out.println("Enter the title of the book you would like to search for: ");
+                                    Scanner sc = new Scanner(System.in);
+                                    System.out.println("Search for: ");
                                     String x = sc.nextLine();
                                     Map<Integer, Book> map = BD.search(x);
                                     if (map.isEmpty()) {
-                                        System.out.println("No book was found");
+                                        System.out.println("No book is found");
+                                        Thread.sleep(100);
+
                                     }
                                     map.forEach((t, u) -> {
-                                        System.out.println(t + ", " + u);
+                                        System.out.println(t + ", " + u + ", Availability : " + u.available);
                                     });
-                                    
-                                    BD.checkSearchBook(UIM.getBookGenre(x, x, x, x, userOption));
+                                    Thread.sleep(100);
 
                                     break;
-
                                 case 6:
-                                    //view and pay fees
+                                    System.out.println(user.bookList);
+
                                     break;
                                 case 0:
                                     System.out.println("Exiting user session...");
                                     break;
                                 default:
                                     System.out.println("Invalid option. Please input a number between 0 and 6.");
+
                                     break;
                             }
                         } while (userOption != 0);
@@ -128,22 +179,27 @@ public class Library {
                                     break;
                                 case 3:
                                     //ANnnie search for a book
-                                    System.out.println("Enter the title of the book you would like to search for: ");
-
+                                    Scanner sc = new Scanner(System.in);
                                     String x = sc.nextLine();
                                     Map<Integer, Book> map = BD.search(x);
                                     if (map.isEmpty()) {
                                         System.out.println("No book is found");
+                                        Thread.sleep(100);
+
                                     }
                                     map.forEach((t, u) -> {
                                         System.out.println(t + ", " + u);
+
                                     });
+                                    Thread.sleep(100);
 
                                     break;
                                 case 4:
                                     // add book
                                     BD.addBook(UIM.getBook());
                                     System.out.println("Book successfully added!");
+                                    Thread.sleep(100);
+
                                     break;
                                 case 5: //delete a book
                                     System.out.print("Id of the book to be removed : ");
