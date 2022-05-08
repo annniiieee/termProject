@@ -1,10 +1,9 @@
-package termproject;
+package library;
 
+public class Staff extends People implements iAdminRights {
 
-public class Staff extends People implements iAdminRights{
-
-    public Staff(int id, String password, String name, String address, double salary) {
-        super(id, password, name, address, salary);
+    public Staff(String password, String firstName, String lastName, String address) {
+        super(password, firstName, lastName, address);
     }
 
     @Override
@@ -41,5 +40,5 @@ public class Staff extends People implements iAdminRights{
     public void changeUserPassword() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

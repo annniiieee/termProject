@@ -1,4 +1,4 @@
-package termproject;
+package library;
 
 
 public interface iAdminRights {

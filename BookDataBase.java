@@ -1,56 +1,76 @@
-
-package termproject;
+package library;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class BookDataBase {
-    
-    Map<Integer, Book> linkedHashMap = new LinkedHashMap<>();
-    
-    public void addBook (Book book){
-        linkedHashMap.put(book.bookId, book);
+
+    Map<Integer, Book> bookData = new LinkedHashMap<>();
+
+    public void addBook(Book book) {
+        bookData.put(book.bookId, book);
     }
 
-    public BookDataBase() {
-        Map<Integer, Book> linkedHashMap = new LinkedHashMap<>();        
+    public void removeBook(int id) {
+        if (bookData.isEmpty()) {
+            System.out.println("Empty library");
+        } else {
+
+            bookData.remove(id);
+        }
     }
 
-    
-    
-    public void removeBook(int id){
-        if (linkedHashMap.isEmpty()) {
-            System.out.println("Empty library");            
-        }
-        else{
-            for (Map.Entry<Integer,Book> entry : linkedHashMap.entrySet()) {
-                if (entry.getKey() == id) {
-                    linkedHashMap.remove(entry.getKey());
-                }
-            }
+    public boolean checkBookExistence(int id) {
+        if (bookData.containsKey(id)) {
+            System.out.println("The book is available.");
+            return true;
+           
+
+        } else {
+            System.out.println("The book is unavailable.");
+            return false;
         }
     }
-    
-    public boolean checkBookExistence(int id){
-        if (linkedHashMap.containsKey(id)) {
+
+    public boolean checkSearchBook (Book book){
+        if (bookData.containsValue(book)) {
+            System.out.println("The book is available.");
             return true; 
             
         }
         else {
+            System.out.println("The book is unavailable.");
             return false; 
         }
     }
-    
-    public void printBooks(){
-        if (linkedHashMap.isEmpty()) {
-            System.out.println("Emppty book list.");
-        }
-        else{
+    public void printBooks() {
+        if (bookData.isEmpty()) {
+            System.out.println("Empty book list.");
+        } else {
             System.out.println("The book list: ");
             int j = 0;
-            for (Map.Entry<Integer,Book> entry : linkedHashMap.entrySet()){
+            for (Map.Entry<Integer, Book> entry : bookData.entrySet()) {
                 System.out.print(j++ + "- ");
                 entry.getValue().printBook();
-            }        
+            }
         }
-    }    
+    }
+
+    public Map<Integer, Book> search(String query) {
+      
+        return this.bookData.keySet().stream().filter(
+                id
+                -> Arrays.stream(
+                        this.bookData.get(id).keyword
+                )
+                        .anyMatch(
+                                (keyword) -> keyword.equalsIgnoreCase(query)
+                        )
+        ).collect(
+                Collectors.toMap(id -> id, this.bookData::get)
+        );
+
+    }
+
+
 }

@@ -5,11 +5,14 @@
  */
 package library;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Admin
  */
 public class User extends People {
+    ArrayList <Book> borrowedBooks = new ArrayList <>(); 
 
     public User(String password, String lastName, String firstName, String address) {
         super(password, lastName, firstName, address);

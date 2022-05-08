@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package termproject;
+package library;
 
 import java.util.Scanner;
 
@@ -83,16 +83,16 @@ public class UserInputManager {
     
     public Book getBookGenre(String n1, String n2, String n3, String n4, int y){
         if (n3.equalsIgnoreCase("manga")) {
-            return new Manga(n1, n2, n4, y);
+            return new Manga(n1, n2, n4, y, n3);
         }        
         if (n3.equalsIgnoreCase("comicbook")) {
-            return new ComicBook(n1, n2, n4, y);
+            return new ComicBook(n1, n2, n4, y, n3);
         }        
         if (n3.equalsIgnoreCase("documentary")) {
-            return new Documentary(n1, n2, n4, y);
+            return new Documentary(n1, n2, n4, y, n3);
         }        
         else{
-            return new Novel(n1, n2, n4, y);        
+            return new Novel(n1, n2, n4, y, n3);        
         }
     }
     
@@ -188,7 +188,8 @@ public class UserInputManager {
                          + "\n2. Log in as admin." 
                          + "\n3. Create a new user." 
                          + "\n4. Create a new admin."
-                         + "\n0. End session.");        
+                         + "\n0. End session.");   
+        
         return sc.nextInt();
     }
     

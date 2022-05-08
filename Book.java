@@ -1,7 +1,8 @@
-package termproject;
+package library;
 
-abstract class Book {
-
+public abstract class Book {
+    
+    public String[] keyword;
     public String name, author, genre, publisher;
     public int year;
     public static int counter;
@@ -141,12 +142,14 @@ abstract class Book {
         return (double) (fineDays * finePerDay);
     }
 
-    public Book(String name, String author, String publisher, int year) {
+    public Book(String name, String author, String publisher, int year, String genre) {
         this.name = name;
         this.author = author;
         this.publisher = publisher;
         this.year = year;
+        this.genre = genre;
         counter++;
+        this.keyword = new String[]{name, author, publisher, String.valueOf(year), genre};
     }
 
     public Book(String genre) {
@@ -159,6 +162,11 @@ abstract class Book {
                 + "\nPublisher: " + getPublisher()
                 + "\nYear: " + getYear()
                 + "\nBook Id: " + getBookId());
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" + "name=" + name + ", author=" + author + ", genre=" + genre + ", publisher=" + publisher + ", year=" + year + ", bookId=" + bookId + ", dateBorrowed=" + dateBorrowed + ", dateReturned=" + dateReturned + ", fine=" + fine + ", fineStatus=" + fineStatus + '}';
     }
 
 }
