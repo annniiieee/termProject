@@ -1,16 +1,22 @@
 package library;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+
 public abstract class Book {
-    
     public String[] keyword;
     public String name, author, genre, publisher;
     public int year;
     public static int counter;
     public int bookId;
-    protected String dateBorrowed;
-
-    protected String dateReturned;
+    private final LocalDate dateBorrowed;
     public int fine;
+
+    public LocalDate getDateBorrowed() {
+        return dateBorrowed;
+    }
+
     public String fineStatus;
     public boolean available = true;
 
@@ -36,11 +42,6 @@ public abstract class Book {
         return g;
     }
 
-    public static void setG(String[] g) {
-        Book.g = g;
-    }
-    
-    
     public String getName() {
         return name;
     }
@@ -97,22 +98,6 @@ public abstract class Book {
         this.bookId = bookId;
     }
 
-    public String getDateBorrowed() {
-        return dateBorrowed;
-    }
-
-    public void setDateBorrowed(String dateBorrowed) {
-        this.dateBorrowed = dateBorrowed;
-    }
-
-    public String getDateReturned() {
-        return dateReturned;
-    }
-
-    public void setDateReturned(String dateReturned) {
-        this.dateReturned = dateReturned;
-    }
-
     public int getFine() {
         return fine;
     }
@@ -129,42 +114,16 @@ public abstract class Book {
         this.fineStatus = fineStatus;
     }
 
-    public double computeFine(String dateBorrowed, String dateReturned) {
+    public double computeFine(LocalDate returned) {
         double finePerDay = 0.20d;
-        //date :     dd/mm/yyyy
+        if ((ChronoUnit.DAYS.between(dateBorrowed, returned)) > 14);
 
-        int[] daysOfMonths = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        long timeDelta = Math.max(
+                0,
+                ChronoUnit.DAYS.between(dateBorrowed.plusDays(14), returned)
+        );
 
-        int daysBorrowed = Integer.valueOf(dateBorrowed.substring(0, 2));
-        int monthsB = Integer.valueOf(dateBorrowed.substring(3, 5));
-        int monthsToDayBorrowed = 0;
-        int yearToDayB = (int) (Integer.valueOf(dateBorrowed.substring(6)) * 365.25d);
-        for (int i = 0; i < monthsB; i++) {
-            monthsToDayBorrowed = daysOfMonths[i] + monthsToDayBorrowed;
-        }
-
-        int daysReturned = Integer.valueOf(dateReturned.substring(0, 2));
-        int months = Integer.valueOf(dateReturned.substring(3, 5));
-        int monthsToDayReturned = 0;
-        int yearToDayR = (int) (Integer.valueOf(dateReturned.substring(6)) * 365.25d);
-        for (int i = 0; i < months; i++) {
-            monthsToDayReturned = daysOfMonths[i] + monthsToDayReturned;
-        }
-
-        int fineDays = (daysReturned + monthsToDayReturned + yearToDayR) - (daysBorrowed + monthsToDayBorrowed + yearToDayB + 21);
-        if (fineDays < 0) {
-            fineDays = 0;
-        }
-        System.out.println("fine Days " + fineDays);
-        System.out.println("fined months " + (months - monthsB));
-        System.out.println("fined days :" + (daysReturned - daysBorrowed));
-        System.out.println(monthsToDayReturned);
-        System.out.println(monthsToDayBorrowed);
-
-        System.out.println("months to days : " + (monthsToDayReturned - monthsToDayBorrowed));
-        System.out.println(fineDays * finePerDay);
-
-        return (double) (fineDays * finePerDay);
+        return timeDelta * finePerDay;
     }
 
     public Book(String name, String author, String publisher, int year, String genre) {
@@ -174,12 +133,12 @@ public abstract class Book {
         this.year = year;
         this.genre = genre;
         counter++;
+        this.dateBorrowed = LocalDate.now();
+
         this.keyword = new String[]{name, author, publisher, String.valueOf(year), genre};
     }
 
-    public Book(String genre) {
-        this.genre = genre;
-    }
+ 
 
     public void printBook() {
         System.out.println(getName() + " by " + getAuthor()
@@ -191,8 +150,7 @@ public abstract class Book {
 
     @Override
     public String toString() {
-        return "Book{" + "Title: " + name + ", Author: " + author + ", Genre: " + genre + ", Publisher: " + publisher + ", Year: " + year + ", Books'Id: " + bookId + ", Date Borrowed: " + dateBorrowed + ", Date returned/To be returned: " + dateReturned + ", Fine:  " + fine + ", Fine'status: " + fineStatus + '}';
+        return "Book {" + "Title: " + name + "| Author: " + author + "| Genre: " + genre + "| Publisher: " + publisher + "| Year: " + year + "| Book's Id: " + bookId + "| Date Borrowed: " + dateBorrowed + "| Fine:  " + fine + "| Fine'status: " + fineStatus + '}';
     }
 
 }
-

@@ -2,8 +2,8 @@ package library;
 
 
 public interface iAdminRights {
-    void addBooks(); 
-    void removeBooks(); 
+    void addBook(Book book); 
+    void removeBook(int id); 
     void addUsers(); 
     void removeUsers(); 
     void viewUsers(); 

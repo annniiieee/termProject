@@ -6,13 +6,12 @@ public class Staff extends People implements iAdminRights {
         super(password, firstName, lastName, address);
     }
 
-    @Override
-    public void addBooks() {
+    public void addBook() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void removeBooks() {
+    public void removeBook(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -40,5 +39,12 @@ public class Staff extends People implements iAdminRights {
     public void changeUserPassword() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void addBook(Book book) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+ 
 
 }

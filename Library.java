@@ -1,10 +1,10 @@
 package library;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Date;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.time.*;
+import java.util.*;
 
 /**
  *
@@ -16,13 +16,16 @@ public class Library {
      * @param args the command line arguments
      * @throws java.lang.InterruptedException
      */
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
 
         // TODO code application logic here
         UserInputManager UIM = new UserInputManager();
         UserDatabase UD = new UserDatabase();
         AdminDatabase AD = new AdminDatabase();
         BookDataBase BD = new BookDataBase();
+        Scanner sc = new Scanner(System.in);
+
+        LocalDate dateReturn = LocalDate.now().plusDays(14);
 
         int mainMenuOption = 0;
 
@@ -78,18 +81,24 @@ public class Library {
                                 case 3:
 
                                     int id = UIM.getBookId();
-                                    LocalDate date = LocalDate.now(); 
-                                          LocalDate  dateReturn = LocalDate.now().plusDays(14); 
+
                                     Book book = BD.bookData.get(id);
                                     if (book.available == true) {
                                         book.setAvailable(false);
                                         user.bookList.add(book);
                                         System.out.println("Succesfully borrowed");
-                                        book.setDateBorrowed(String.valueOf(date));
-                                        System.out.println("The book was borrows on: " + book.getDateBorrowed());
-                                        book.setDateReturned(String.valueOf(dateReturn));
-                                        System.out.println("To be returned: " + book.getDateReturned());
-                                        Thread.sleep(100);
+                                        book.getDateBorrowed();
+//                                        System.out.println("The book was borrows on: " + book.getDateBorrowed());
+//                                        book.setDateReturned(String.valueOf(dateReturn));
+//                                        System.out.println("To be returned: " + book.getDateReturned());
+//                                        Thread.sleep(100);
+
+                                        Date d = Date.from(Instant.now());
+
+                                        FileWriter fw = new FileWriter("C:\\Users\\nguye\\OneDrive - Vanier College\\Documents\\receipt.txt");
+                                        fw.write("Thanks for borrowing books at library inc.\n" + "Here's your receipt:"
+                                                + user.bookList);
+                                        fw.flush();
                                     } else {
                                         System.err.println("Book not available");
                                         Thread.sleep(100);
@@ -121,12 +130,12 @@ public class Library {
                                     break;
                                 case 5:
                                     //search a book
-                                    Scanner sc = new Scanner(System.in);
-                                    System.out.println("Search for: ");
+
+                                    System.out.println("Enter a keyword: ");
                                     String x = sc.nextLine();
                                     Map<Integer, Book> map = BD.search(x);
                                     if (map.isEmpty()) {
-                                        System.out.println("No book is found");
+                                        System.out.println("No book was found");
                                         Thread.sleep(100);
 
                                     }
@@ -137,8 +146,13 @@ public class Library {
 
                                     break;
                                 case 6:
+                                    // view and pay fees 
                                     System.out.println(user.bookList);
-
+                                    for (int i = 0; i < user.bookList.size(); i++) {
+                                        
+                                        BD.bookData.get(i).computeFine(dateReturn);
+                                    }
+                                    
                                     break;
                                 case 0:
                                     System.out.println("Exiting user session...");
@@ -179,7 +193,8 @@ public class Library {
                                     break;
                                 case 3:
                                     //ANnnie search for a book
-                                    Scanner sc = new Scanner(System.in);
+
+                                    System.out.println("Enter a keyword: ");
                                     String x = sc.nextLine();
                                     Map<Integer, Book> map = BD.search(x);
                                     if (map.isEmpty()) {
@@ -205,6 +220,7 @@ public class Library {
                                     System.out.print("Id of the book to be removed : ");
                                     BD.removeBook(adminOption);
                                     System.out.println("Book succesfully removed");
+                                    Thread.sleep(100);
                                     break;
                                 case 6:
                                     //view books

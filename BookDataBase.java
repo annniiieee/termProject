@@ -1,17 +1,18 @@
 package library;
 
 import java.util.*;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-public class BookDataBase {
+public class BookDataBase implements iAdminRights {
 
     Map<Integer, Book> bookData = new LinkedHashMap<>();
 
+    @Override
     public void addBook(Book book) {
         bookData.put(book.bookId, book);
     }
 
+    @Override
     public void removeBook(int id) {
         if (bookData.isEmpty()) {
             System.out.println("Empty library");
@@ -58,4 +59,28 @@ public class BookDataBase {
 
     }
 
+    @Override
+    public void addUsers() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removeUsers() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void viewUsers() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void viewLoans() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void changeUserPassword() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

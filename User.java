@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  */
 public class User extends People {
 
-    ArrayList<Book> bookList;
+    ArrayList<Book> bookList = new ArrayList<>();
 
     public User(String password, String lastName, String firstName, String address) {
         super(password, lastName, firstName, address);
