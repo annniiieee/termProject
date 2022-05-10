@@ -125,14 +125,8 @@ public class Library {
                                                 }));
                                                 break;
                                             case 2:
-                                                System.out.println("Sorting by year");
-                                                System.out.println(BD.bubbleSort(BD.getBookData(), new Comparator<Book>() {
-                                                    @Override
-                                                    public int compare(Book o1, Book o2) {
-                                                        return Integer.compare(o1.getYear(), o2.getYear());
-                                                    }
-                                                })
-                                                );
+                                                    System.out.println("Sorting by name of the book");
+                                                    BD.sortbyName();
                                                 break;
                                             case 0:
                                                 System.out.println("Exiting book list...");
