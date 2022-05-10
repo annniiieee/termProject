@@ -12,9 +12,9 @@ import java.util.Map;
  *
  * @author Admin
  */
-public class sortBookByNameComparator implements Comparator<Map.Entry<Integer, Book>>{
+public class sortBookByNameComparator implements Comparator<Book>{
     @Override
-    public int compare(Map.Entry<Integer, Book> b1,Map.Entry<Integer, Book> b2){  
-        return b1.getValue().getName().compareTo(b2.getValue().getName());  
+    public int compare(Book b1,Book b2){  
+        return b1.getName().compareTo(b2.getName());  
         }  
     }      

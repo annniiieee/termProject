@@ -68,25 +68,17 @@ public class BookDataBase implements iAdminRights, Database {
         }
     }
     
-    public void sortByYear(){
-        Map<Integer, Book> cloneBookData = bookData;
-        int temp =0;
-        for (int i = 1; i < cloneBookData.size()-1; i++) {
-            for (int j = 1; j < cloneBookData.size()-1-i; j++) {
-                
-                
-                if (cloneBookData.get(j).getYear() > cloneBookData.get(j+1).getYear()) {
-                    temp = cloneBookData.get(j).getYear();
-                    cloneBookData.get(j).setYear(cloneBookData.get(j+1).getYear());
-                    cloneBookData.get(j).setYear(temp);
-                }
-            }
+    public void sortbyName(){
+        Map<Integer, Book> cloneBookData = new HashMap<>();
+        List<Book> l = new LinkedList<>(bookData.values());
+        Collections.sort(l, new sortBookByNameComparator());
+        
+        for (int i = 0; i < l.size(); i++) {
+            l.get(i).printBook();
         }
-        printBooks(cloneBookData);
     }
     
-    public void sortByName(){
-        Map<Integer, Book> cloneBookData = bookData;
-        Collections.sort(cloneBookData, new sortBookByNameComparator());
+    public void sortByYear(){
+        
     }
 }

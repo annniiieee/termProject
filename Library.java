@@ -117,8 +117,8 @@ public class Library {
                                     do {                                        
                                         switch(sortOption){
                                             case 1:
-                                                System.out.println("Sorting by name");
-                                                
+                                                System.out.println("Sorting by name of the book");
+                                                BD.sortbyName();
                                                 break;
                                             case 2:
                                                 System.out.println("Sorting by year");
