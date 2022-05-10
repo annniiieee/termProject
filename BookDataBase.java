@@ -107,6 +107,16 @@ public class BookDataBase implements iAdminRights, Database {
         return answer;
     }
 
+    public void sortbyName(){
+        Map<Integer, Book> cloneBookData = new HashMap<>();
+        List<Book> l = new LinkedList<>(bookData.values());
+        Collections.sort(l, new sortBookByNameComparator());
+        
+        for (int i = 0; i < l.size(); i++) {
+            l.get(i).printBook();
+        }
+    }
+    
     public static void main(String[] args) {
 
         BookDataBase bd = new BookDataBase();
