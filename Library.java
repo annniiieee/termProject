@@ -117,16 +117,22 @@ public class Library {
                                         switch (sortOption) {
                                             case 1:
                                                 System.out.println("Sorting by name of the book");
-                                                System.out.println(BD.bubbleSort(BD.getBookData(), new Comparator<Book>() {
+                                                BD.bubbleSort(BD.getBookData(), new Comparator<Book>() {
                                                     @Override
                                                     public int compare(Book o1, Book o2) {
-                                                        return o1.getName().compareTo(o2.getName());
+                                                        return o1.getName().toLowerCase().compareTo(o2.getName().toLowerCase());
                                                     }
-                                                }));
+                                                });
                                                 break;
                                             case 2:
-                                                    System.out.println("Sorting by name of the book");
-                                                    BD.sortbyName();
+                                                System.out.println("Sorting by year");
+                                                BD.bubbleSort(BD.getBookData(), new Comparator<Book>() {
+                                                    @Override
+                                                    public int compare(Book o1, Book o2) {
+                                                        return Integer.compare(o1.getYear(), o2.getYear());
+                                                    }
+                                                }
+                                                );
                                                 break;
                                             case 0:
                                                 System.out.println("Exiting book list...");

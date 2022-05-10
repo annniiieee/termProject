@@ -72,12 +72,12 @@ public class BookDataBase implements iAdminRights, Database {
         if (bookData.containsKey(id)) {
             return bookData.get(id);
         } else {
-            System.out.println("id does not correspod to any existing book");
+            System.out.println("id does not correspond to any existing book");
             return getBook(id);
         }
     }
 
-    public <T> List<T> bubbleSort(
+    public <T> void bubbleSort(
             Map<Integer, T> map,
             Comparator<T> comparator) {
 
@@ -102,39 +102,9 @@ public class BookDataBase implements iAdminRights, Database {
 
         ArrayList<T> answer = new ArrayList<>();
         for (int i = 0; i < entry.size(); i++) {
-            answer.add(entry.get(i).getValue());
+            System.out.println(entry.get(i).getValue());
         }
-        return answer;
-    }
-
-    public void sortbyName(){
-        Map<Integer, Book> cloneBookData = new HashMap<>();
-        List<Book> l = new LinkedList<>(bookData.values());
-        Collections.sort(l, new sortBookByNameComparator());
-        
-        for (int i = 0; i < l.size(); i++) {
-            l.get(i).printBook();
-        }
-    }
-    
-    public static void main(String[] args) {
-
-        BookDataBase bd = new BookDataBase();
-        HashMap<Integer, Integer> hashmap = new HashMap();
-        hashmap.put(1, 2);
-        hashmap.put(11, 2);
-        hashmap.put(12, 27);
-        hashmap.put(13, 22);
-        hashmap.put(18, 24);
-        hashmap.put(185, 4562);
-
-        System.out.println(bd.bubbleSort(hashmap, new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return Integer.compare(o1, o2);
-            }
-        }));
-
+       
     }
 
 }
