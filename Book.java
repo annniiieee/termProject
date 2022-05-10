@@ -159,8 +159,6 @@ public abstract class Book {
         this.keyword = new String[]{name, author, publisher, String.valueOf(year), genre};
     }
 
- 
-
     public void printBook() {
         System.out.println(getName() + " by " + getAuthor()
                 + "\nGenre: " + getGenre()

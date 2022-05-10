@@ -5,6 +5,7 @@
  */
 package library;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,6 +64,14 @@ public class User extends People {
         this.address = address;
     }
 
+    public void displpayFines(LocalDate now){
+        for (int i = 0; i < bookList.size(); i++) {
+            System.out.print("Book " + i + ": " + bookList.get(i).name + "\t Fine : ");
+            bookList.get(i).computeFine(now);
+            System.out.println();
+        }     
+    }    
+    
     @Override
     public void printInfo() {
         System.out.println("User Id: " + id);

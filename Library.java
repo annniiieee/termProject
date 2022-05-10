@@ -142,15 +142,9 @@ public class Library {
                                     break;
                                 case 6:
                                     // view and pay fees 
-                                   
-                                    for (int i = 0; i < user.bookList.size(); i++) {
-                                        System.out.print("Book " + i + ": " + user.bookList.get(i).name + "\t Fine : ");
-                                        user.bookList.get(i).computeFine(now);
-                                        System.out.println();
-                                    }
+                                    user.displpayFines(now);
+                                    
                                     break;
-
-
 
                                 case 7: //compute fine testing for exam
                                     System.out.println("The number of days you want to skip");
@@ -186,16 +180,13 @@ public class Library {
                             }
                             switch (adminOption) {
                                 case 1:
-                                    //sometimes when use the getAdmin function it returns a null and crashes the program, 
-                                    //but sometimes it works. We're just letting you know about this issue that we'll fix when we present the final product
-                                    //, but cannot right now due to time constraints.
                                     AD.getAdmin(adminSessionId).printInfo();
                                     break;
                                 case 2:
                                     AD.changePassword(AD.getAdmin(adminSessionId));
                                     break;
                                 case 3:
-                                    //ANnnie search for a book
+                                    //search for a book
 
                                     System.out.println("Enter a keyword: ");
                                     String x = sc.nextLine();
@@ -231,24 +222,17 @@ public class Library {
                                     break;
                                 case 7:
                                     //view user's profile
-                                    //have to add security measures
                                     int id = UIM.getId();
                                     UD.getUser(id).printInfo();
                                     break;
                                 case 8:
                                     //delete user 
-                                    //have to add security measures
                                     UD.removeUser(UIM.getId());
                                     System.out.println("User has been removed.");
                                     break;
                                 case 9:
-                                        
-                                    
-                                     for (int i = 0; i < user.bookList.size(); i++) {
-                                        System.out.print("Book " + i + ": " + user.bookList.get(i).name + "\t Fine : ");
-                                        user.bookList.get(i).computeFine(now);
-                                        System.out.println();
-                                    }
+                                    //display a user's fines    
+                                    UD.getUser(UIM.getId()).displpayFines(now);
                                     break;
                                    
                                 case 0:
