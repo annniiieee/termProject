@@ -30,13 +30,13 @@ public class Library {
 
         BD.addBook(new ComicBook("Marvel", "A", "B", 100, "ComicBook"));
 
-        BD.addBook(new ComicBook("BestBook", "C", "D", 1100, "Documentary"));
-        BD.addBook(new ComicBook("frank", "E", "F", 1020, "Manga"));
-        BD.addBook(new ComicBook("kevin", "G", "H", 3100, "Novel"));
-        BD.addBook(new ComicBook("samuel", "samuel", "samuel", -100, "Novel"));
-        BD.addBook(new ComicBook("com", "I", "J", 0, "Documentary"));
-        BD.addBook(new ComicBook("asd", "K", "L", 400, "Manga"));
-        BD.addBook(new ComicBook("pop", "M", "N", 129, "Manga"));
+        BD.addBook(new Documentary("BestBook", "C", "D", 1100, "Documentary"));
+        BD.addBook(new Manga("frank", "E", "F", 1020, "Manga"));
+        BD.addBook(new Novel("kevin", "G", "H", 3100, "Novel"));
+        BD.addBook(new Novel("samuel", "samuel", "samuel", -100, "Novel"));
+        BD.addBook(new Documentary("com", "I", "J", 0, "Documentary"));
+        BD.addBook(new Manga("asd", "K", "L", 400, "Manga"));
+        BD.addBook(new Manga("pop", "M", "N", 129, "Manga"));
         BD.addBook(new ComicBook("hey", "O", "P", 100, "Comicbook"));
 
         do {
