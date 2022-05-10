@@ -28,16 +28,16 @@ public class Library {
 
         int mainMenuOption = 0;
 
-        BD.addBook(new ComicBook("Marvel", "", "", 100, ""));
+        BD.addBook(new ComicBook("Marvel", "A", "B", 100, "ComicBook"));
 
-        BD.addBook(new ComicBook("BestBook", "", "", 100, ""));
-        BD.addBook(new ComicBook("frank", "", "", 100, ""));
-        BD.addBook(new ComicBook("kevin", "", "", 100, ""));
-        BD.addBook(new ComicBook("samuel", "samuel", "samuel", 100, "samuel"));
-        BD.addBook(new ComicBook("com", "", "", 100, ""));
-        BD.addBook(new ComicBook("asd", "", "", 100, ""));
-        BD.addBook(new ComicBook("pop", "", "", 100, ""));
-        BD.addBook(new ComicBook("hey", "", "", 100, ""));
+        BD.addBook(new ComicBook("BestBook", "C", "D", 1100, "Documentary"));
+        BD.addBook(new ComicBook("frank", "E", "F", 1020, "Manga"));
+        BD.addBook(new ComicBook("kevin", "G", "H", 3100, "Novel"));
+        BD.addBook(new ComicBook("samuel", "samuel", "samuel", -100, "Novel"));
+        BD.addBook(new ComicBook("com", "I", "J", 0, "Documentary"));
+        BD.addBook(new ComicBook("asd", "K", "L", 400, "Manga"));
+        BD.addBook(new ComicBook("pop", "M", "N", 129, "Manga"));
+        BD.addBook(new ComicBook("hey", "O", "P", 100, "Comicbook"));
 
         
         do {
@@ -80,48 +80,18 @@ public class Library {
                                     break;
                                 case 3:
 
-                                    int id = UIM.getBookId();
-
-                                    Book book = BD.bookData.get(id);
-                                    if (book.available == true) {
-                                        book.setAvailable(false);
-                                        user.bookList.add(book);
-                                        System.out.println("Succesfully borrowed");
-                                        book.setDateBorrowed(LocalDate.now());
-                                        System.out.println("Check receipt.txt for your receipt!");
-
-                                        FileWriter fw = new FileWriter("receipt.txt");
-                                        fw.write("Thanks for borrowing books at library inc.\n" + "Here's your receipt:"
-                                                + user.bookList);
-                                        fw.flush();
-                                    } else {
-                                        System.err.println("Book not available");
-                                        Thread.sleep(100);
-
+                                    Book b = BD.getBook(UIM.getBookId());
+                                    while (b.equals(null)) {                                        
+                                        b = BD.getBook(UIM.getBookId());
                                     }
+                                        user.borrowBook(b);
+                                        user.printReceipt();
+                                        Thread.sleep(100);
 
                                     break;
                                 case 4:
-                                    int id2 = UIM.getBookId();
-                                    Book book2 = BD.bookData.get(id2);
-                                    boolean exist = false;
-
-                                    for (int i = 0; i < user.bookList.size(); i++) {
-                                        if (book2.equals(user.bookList.get(i))) {
-                                            exist = true;
-                                        }
-                                    }
-
-                                    if (exist) {
-
-                                        user.bookList.remove(book2);
-                                        book2.setAvailable(true);
-                                    } else {
-
-                                        System.err.println("You have not borrowed this book");
-                                        Thread.sleep(100);
-
-                                    }
+                                    user.removeBorrowedBook(BD.bookData.get(UIM.getBookId()));
+                                    
                                     break;
                                 case 5:
                                     //search a book
@@ -141,12 +111,35 @@ public class Library {
 
                                     break;
                                 case 6:
+                                    //view all books and sort them
+                                    BD.printBooks(BD.bookData);
+                                    int sortOption = UIM.sortingOption();
+                                    do {                                        
+                                        switch(sortOption){
+                                            case 1:
+                                                System.out.println("Sorting by name");
+                                                
+                                                break;
+                                            case 2:
+                                                System.out.println("Sorting by year");
+                                                BD.sortByYear();
+                                                break;
+                                            case 0:
+                                                System.out.println("Exiting book list...");
+                                                break;
+                                            default:
+                                                System.out.println("Invalid input. Please input numbers between 0 and 2.");  
+                                                break;                                        }
+                                    } while ((sortOption = UIM.sortingOption()) != 0); 
+                                    break;
+                                    
+                                case 7:
                                     // view and pay fees 
                                     user.displpayFines(now);
                                     
                                     break;
 
-                                case 7: //compute fine testing for exam
+                                case 8: //compute fine testing for exam
                                     System.out.println("The number of days you want to skip");
                                     now = now.plusDays(sc.nextInt());
 
@@ -211,14 +204,13 @@ public class Library {
 
                                     break;
                                 case 5: //delete a book
-                                    System.out.print("Id of the book to be removed : ");
-                                    BD.removeBook(adminOption);
+                                    BD.removeBook(UIM.getBookId());
                                     System.out.println("Book succesfully removed");
                                     Thread.sleep(100);
                                     break;
                                 case 6:
                                     //view books
-                                    BD.printBooks();
+                                    BD.printBooks(BD.bookData);
                                     break;
                                 case 7:
                                     //view user's profile
@@ -228,7 +220,6 @@ public class Library {
                                 case 8:
                                     //delete user 
                                     UD.removeUser(UIM.getId());
-                                    System.out.println("User has been removed.");
                                     break;
                                 case 9:
                                     //display a user's fines    

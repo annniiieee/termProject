@@ -5,6 +5,8 @@
  */
 package library;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -66,11 +68,38 @@ public class User extends People {
 
     public void displpayFines(LocalDate now){
         for (int i = 0; i < bookList.size(); i++) {
-            System.out.print("Book " + i + ": " + bookList.get(i).name + "\t Fine : ");
+            System.out.print("Book " + (i+1) + ": " + bookList.get(i).name + "\t Fine : ");
             bookList.get(i).computeFine(now);
             System.out.println();
         }     
     }    
+
+    public void removeBorrowedBook(Book b){
+        boolean exist = false;
+        for (int i = 0; i < bookList.size(); i++) {
+            if (b.equals(bookList.get(i))) {
+                exist = true;
+                     }
+            }
+        if (exist) {
+            bookList.remove(b);
+            b.setAvailable(true);
+            } else {
+                System.err.println("You have not borrowed this book");
+            }    
+    }
+    
+    public void borrowBook(Book book){
+        if (book.available == true) {
+            book.setAvailable(false);
+            bookList.add(book);
+            System.out.println("Succesfully borrowed");
+            book.setDateBorrowed(LocalDate.now());   
+        } 
+        else {
+            System.err.println("Book not available");
+        }        
+    }
     
     @Override
     public void printInfo() {
@@ -83,6 +112,18 @@ public class User extends People {
         } catch (InterruptedException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+    }
+    
+    public void printReceipt(){
+        System.out.println("Check receipt.txt for your receipt!");
+        FileWriter fw;
+        try {
+            fw = new FileWriter("receipt.txt");
+            fw.write("Thanks for borrowing books at library inc.\n" + "Here's your receipt:"
+            + bookList);
+            fw.flush();    
+        } catch (IOException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -35,26 +35,17 @@ public class UserDatabase implements Database{
     }    
     
     public void removeUser(int id){
-        if (h.containsKey(id)) {
+        if (h.isEmpty()) {
+            System.out.println("Empty User Base.");
+        }
+        else if (h.containsKey(id)) {
             h.remove(id);        
+            System.out.println("User has been removed.");
         }
         else{
             System.out.println("User id does not exist");
         }
     }     
-    public void removePeople(int id){
-        if (h.isEmpty()) {
-            System.out.println("Empty User Base.");
-        }
-        else{
-            if (h.containsKey(id)) {
-                h.remove(id);
-            }
-            else{
-                System.out.println("Could not remove user. Invalid id.");
-            }
-        }
-    }
     
     public void changePassword(People u){
         UserInputManager UIM = new UserInputManager();

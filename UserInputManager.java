@@ -212,7 +212,8 @@ public class UserInputManager {
                 + "\n3. Borrow a book."
                 + "\n4. Return a book."
                 + "\n5. Search a book."
-                + "\n6. View and pay fees."
+                + "\n6. View all books and sort books."
+                + "\n7. View and pay fees."
                 + "\n7. (FOR THE EXAM) Number of days to be skipped to test computeFine"
                 + "\n0. Log out.");
         return sc.nextInt();
@@ -233,17 +234,21 @@ public class UserInputManager {
                 + "\n0. Log out.");
         return sc.nextInt();
     }
-
-    public int getBookOption() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("How would you like to search the book? "
-                + "\n1. Search by name."
-                + "\n2. Search by ID."
-                + "\n3. Search by author."
-                + "\n4. Search by year."
-                + "\n5. Search by genre."
-                + "\n6. Search by publisher."
-        );
-        return sc.nextInt();
+    
+    public int sortingOption(){
+        int a = 0;
+        try {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("How would you like to sort the books?"
+                    + "\n1. Sort by name."
+                    + "\n2. Sort by year."
+                    + "\n0. Exit sorting system and book list."
+            );            
+            a = sc.nextInt();
+        } catch (Exception e) {
+            System.err.println("Invalid input. Please input a number.");
+            a = sortingOption();
+        }
+        return a;
     }
 }
