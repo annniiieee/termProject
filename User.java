@@ -7,7 +7,9 @@ package library;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -117,10 +119,24 @@ public class User extends People {
     public void printReceipt(){
         System.out.println("Check receipt.txt for your receipt!");
         FileWriter fw;
+        SimpleDateFormat sdf = new SimpleDateFormat(); 
         try {
             fw = new FileWriter("receipt.txt");
-            fw.write("Thanks for borrowing books at library inc.\n" + "Here's your receipt:"
-            + bookList);
+            fw.write(
+                "Thanks for borrowing books at library inc.\n" +
+                "Here's your receipt:"
+                + bookList
+            );
+            for (int i = 0; i < bookList.size(); i++) {
+              fw.write(
+                bookList.get(i).getDateReturned().format(
+                    DateTimeFormatter.BASIC_ISO_DATE
+                )
+              );
+            }
+           
+               fw.flush();
+            
             fw.flush();    
         } catch (IOException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
