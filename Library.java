@@ -183,12 +183,11 @@ public class Library {
                             }
                             switch (adminOption) {
                                 case 1:
-                                    //sometimes when use the getAdmin function it returns a null and crashes the program, 
-                                    //but sometimes it works. We're just letting you know about this issue that we'll fix when we present the final product
-                                    //, but cannot right now due to time constraints.
+                                    //view admin profile
                                     AD.getAdmin(adminSessionId).printInfo();
                                     break;
                                 case 2:
+                                    //change admin password
                                     AD.changePassword(AD.getAdmin(adminSessionId));
                                     break;
                                 case 3:
@@ -228,15 +227,13 @@ public class Library {
                                     break;
                                 case 7:
                                     //view user's profile
-                                    //have to add security measures
-                                    //int id = UIM.getId();
-                                    //UD.getUser(id).printInfo();
+                                    int id = UIM.getId();
+                                    UD.getUser(id).printInfo();
                                     break;
                                 case 8:
-                                    //delete user 
-                                    //have to add security measures
-                                    //UD.removeUser(UIM.getId());
-                                    //System.out.println("User has been removed.");
+                                    //remove user
+                                    UD.removeUser(UIM.getId());
+                                    System.out.println("User has been removed.");
                                     break;
                                 case 9:
                                     //view loans and fees
