@@ -26,8 +26,12 @@ public class BookDataBase extends Database implements iAdminRights {
         if (bookData.isEmpty()) {
             System.out.println("Empty library");
         } else {
-
-            bookData.remove(id);
+            if (bookData.containsKey(id)) {
+                bookData.remove(id);
+                System.out.println("Book succesfully removed");
+            } else {
+                System.out.println("Invalid id.");
+            }
         }
     }
 
@@ -76,7 +80,7 @@ public class BookDataBase extends Database implements iAdminRights {
             Scanner sc = new Scanner(System.in);
             System.out.println("Enter a valid Id");
             return getBook(sc.nextInt());
-            
+
         }
     }
 
@@ -85,7 +89,6 @@ public class BookDataBase extends Database implements iAdminRights {
             Comparator<T> comparator) {
 
         List<Entry<Integer, T>> entry = new ArrayList<>(map.entrySet());
-       
 
         for (int i = 0; i < entry.size(); i++) {
 
@@ -94,7 +97,7 @@ public class BookDataBase extends Database implements iAdminRights {
                 if (comparator.compare(entry.get(j).getValue(), entry.get(j + 1).getValue()) > 0) {
 
                     Entry<Integer, T> temporary = entry.get(j);
-                    entry.set(j, entry.get(j+1));
+                    entry.set(j, entry.get(j + 1));
                     entry.set(j + 1, temporary);
 
                 }
@@ -107,7 +110,7 @@ public class BookDataBase extends Database implements iAdminRights {
         for (int i = 0; i < entry.size(); i++) {
             System.out.println(entry.get(i).getValue());
         }
-       
+
     }
 
 }

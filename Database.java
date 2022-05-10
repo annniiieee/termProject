@@ -9,6 +9,7 @@ package library;
  *
  * @author nguye
  */
-public interface Database {
+public abstract class Database {
+    
     
 }

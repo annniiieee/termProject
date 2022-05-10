@@ -216,7 +216,7 @@ public class Library {
                                     break;
                                 case 5: //delete a book
                                     BD.removeBook(UIM.getBookId());
-                                    System.out.println("Book succesfully removed");
+                                   
                                     Thread.sleep(100);
                                     break;
                                 case 6:
