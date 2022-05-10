@@ -68,41 +68,40 @@ public class User extends People {
         this.address = address;
     }
 
-    public void displpayFines(LocalDate now){
+    public void displpayFines(LocalDate now) {
         for (int i = 0; i < bookList.size(); i++) {
-            System.out.print("Book " + (i+1) + ": " + bookList.get(i).name + "\t Fine : ");
+            System.out.print("Book " + (i + 1) + ": " + bookList.get(i).name + "\t Fine : ");
             bookList.get(i).computeFine(now);
             System.out.println();
-        }     
-    }    
+        }
+    }
 
-    public void removeBorrowedBook(Book b){
+    public void removeBorrowedBook(Book b) {
         boolean exist = false;
         for (int i = 0; i < bookList.size(); i++) {
             if (b.equals(bookList.get(i))) {
                 exist = true;
-                     }
             }
+        }
         if (exist) {
             bookList.remove(b);
             b.setAvailable(true);
-            } else {
-                System.err.println("You have not borrowed this book");
-            }    
+        } else {
+            System.err.println("You have not borrowed this book");
+        }
     }
-    
-    public void borrowBook(Book book){
+
+    public void borrowBook(Book book) {
         if (book.available == true) {
             book.setAvailable(false);
             bookList.add(book);
             System.out.println("Succesfully borrowed");
-            book.setDateBorrowed(LocalDate.now());   
-        } 
-        else {
+            book.setDateBorrowed(LocalDate.now());
+        } else {
             System.err.println("Book not available");
-        }        
+        }
     }
-    
+
     @Override
     public void printInfo() {
         System.out.println("User Id: " + id);
@@ -115,29 +114,27 @@ public class User extends People {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void printReceipt(){
+
+    public void printReceipt() {
         System.out.println("Check receipt.txt for your receipt!");
         FileWriter fw;
-        SimpleDateFormat sdf = new SimpleDateFormat(); 
+        SimpleDateFormat sdf = new SimpleDateFormat();
         try {
-            fw = new FileWriter("receipt.txt");
+            fw = new FileWriter("C:\\Users\\2156116\\Documents\\receipt.txt");
             fw.write(
-                "Thanks for borrowing books at library inc.\n" +
-                "Here's your receipt:"
-                + bookList
+                    "Thanks for borrowing books at library inc.\n"
+                    + "Here's your receipt:\n"
             );
             for (int i = 0; i < bookList.size(); i++) {
-              fw.write(
-                bookList.get(i).getDateReturned().format(
-                    DateTimeFormatter.BASIC_ISO_DATE
-                )
-              );
+                fw.write(String.valueOf(bookList.get(i)));
+                fw.write(
+                        bookList.get(i).getDateBorrowed().plusDays(14).toString()
+                );
+                fw.write("\n");
             }
-           
-               fw.flush();
             
-            fw.flush();    
+
+            fw.flush();
         } catch (IOException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }

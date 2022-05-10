@@ -73,7 +73,10 @@ public class BookDataBase implements iAdminRights, Database {
             return bookData.get(id);
         } else {
             System.out.println("id does not correspond to any existing book");
-            return getBook(id);
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter a valid Id");
+            return getBook(sc.nextInt());
+            
         }
     }
 
