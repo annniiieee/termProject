@@ -10,8 +10,17 @@ public abstract class Book {
     public int year;
     public static int counter;
     public int bookId;
-    private final LocalDate dateBorrowed;
+    private LocalDate dateBorrowed;
+    private LocalDate dateReturned; 
     public int fine;
+
+    public LocalDate getDateReturned() {
+        return dateReturned;
+    }
+
+    public void setDateReturned(LocalDate dateReturned) {
+        this.dateReturned = dateReturned;
+    }
 
     public LocalDate getDateBorrowed() {
         return dateBorrowed;
@@ -34,6 +43,15 @@ public abstract class Book {
         return available;
     }
 
+    public void setDateBorrowed(LocalDate dateBorrowed) {
+        this.dateBorrowed = dateBorrowed;
+    }
+
+    
+    public LocalDate getDateBorrowed(LocalDate dateBorrowed) {
+       return dateBorrowed;
+    }
+    
     public void setAvailable(boolean available) {
         this.available = available;
     }
@@ -123,7 +141,10 @@ public abstract class Book {
                 ChronoUnit.DAYS.between(dateBorrowed.plusDays(14), returned)
         );
 
+        
+        System.out.println(timeDelta * finePerDay);
         return timeDelta * finePerDay;
+        
     }
 
     public Book(String name, String author, String publisher, int year, String genre) {
@@ -133,7 +154,7 @@ public abstract class Book {
         this.year = year;
         this.genre = genre;
         counter++;
-        this.dateBorrowed = LocalDate.now();
+        
 
         this.keyword = new String[]{name, author, publisher, String.valueOf(year), genre};
     }
@@ -150,7 +171,7 @@ public abstract class Book {
 
     @Override
     public String toString() {
-        return "Book {" + "Title: " + name + "| Author: " + author + "| Genre: " + genre + "| Publisher: " + publisher + "| Year: " + year + "| Book's Id: " + bookId + "| Date Borrowed: " + dateBorrowed + "| Fine:  " + fine + "| Fine'status: " + fineStatus + '}';
+        return "Book {" + "Title: " + name + " | Author: " + author + " | Genre: " + genre + " | Publisher: " + publisher + " | Year: " + year + " | Book's Id: " + bookId + " | Date Borrowed: " + dateBorrowed + " | Fine:  " + fine + " | Fine'status: " + fineStatus + '}';
     }
 
 }

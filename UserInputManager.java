@@ -213,6 +213,7 @@ public class UserInputManager {
                 + "\n4. Return a book."
                 + "\n5. Search a book."
                 + "\n6. View and pay fees."
+                + "\n7. (FOR THE EXAM) Number of days to be skipped to test computeFine"
                 + "\n0. Log out.");
         return sc.nextInt();
     }

@@ -1,8 +1,8 @@
 package library;
 
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.time.*;
 import java.util.*;
 
@@ -17,15 +17,14 @@ public class Library {
      * @throws java.lang.InterruptedException
      */
     public static void main(String[] args) throws InterruptedException, IOException {
-
+        FileOutputStream fout = new FileOutputStream("receipt.txt");
         // TODO code application logic here
         UserInputManager UIM = new UserInputManager();
         UserDatabase UD = new UserDatabase();
         AdminDatabase AD = new AdminDatabase();
         BookDataBase BD = new BookDataBase();
         Scanner sc = new Scanner(System.in);
-
-        LocalDate dateReturn = LocalDate.now().plusDays(14);
+        LocalDate now = LocalDate.now();
 
         int mainMenuOption = 0;
 
@@ -40,6 +39,7 @@ public class Library {
         BD.addBook(new ComicBook("pop", "", "", 100, ""));
         BD.addBook(new ComicBook("hey", "", "", 100, ""));
 
+        
         do {
             boolean success = false;
             while (!success) {
@@ -87,15 +87,10 @@ public class Library {
                                         book.setAvailable(false);
                                         user.bookList.add(book);
                                         System.out.println("Succesfully borrowed");
-                                        book.getDateBorrowed();
-//                                        System.out.println("The book was borrows on: " + book.getDateBorrowed());
-//                                        book.setDateReturned(String.valueOf(dateReturn));
-//                                        System.out.println("To be returned: " + book.getDateReturned());
-//                                        Thread.sleep(100);
+                                        book.setDateBorrowed(LocalDate.now());
+                                        System.out.println("Check receipt.txt for your receipt!");
 
-                                        Date d = Date.from(Instant.now());
-
-                                        FileWriter fw = new FileWriter("C:\\Users\\nguye\\OneDrive - Vanier College\\Documents\\receipt.txt");
+                                        FileWriter fw = new FileWriter("receipt.txt");
                                         fw.write("Thanks for borrowing books at library inc.\n" + "Here's your receipt:"
                                                 + user.bookList);
                                         fw.flush();
@@ -147,18 +142,26 @@ public class Library {
                                     break;
                                 case 6:
                                     // view and pay fees 
-                                    System.out.println(user.bookList);
+                                   
                                     for (int i = 0; i < user.bookList.size(); i++) {
-                                        
-                                        BD.bookData.get(i).computeFine(dateReturn);
+                                        System.out.print("Book " + i + ": " + user.bookList.get(i).name + "\t Fine : ");
+                                        user.bookList.get(i).computeFine(now);
+                                        System.out.println();
                                     }
-                                    
+                                    break;
+
+
+
+                                case 7: //compute fine testing for exam
+                                    System.out.println("The number of days you want to skip");
+                                    now = now.plusDays(sc.nextInt());
+
                                     break;
                                 case 0:
                                     System.out.println("Exiting user session...");
                                     break;
                                 default:
-                                    System.out.println("Invalid option. Please input a number between 0 and 6.");
+                                    System.out.println("Invalid option. Please input a number between 0 and 7.");
 
                                     break;
                             }
@@ -183,11 +186,12 @@ public class Library {
                             }
                             switch (adminOption) {
                                 case 1:
-                                    //view admin profile
+                                    //sometimes when use the getAdmin function it returns a null and crashes the program, 
+                                    //but sometimes it works. We're just letting you know about this issue that we'll fix when we present the final product
+                                    //, but cannot right now due to time constraints.
                                     AD.getAdmin(adminSessionId).printInfo();
                                     break;
                                 case 2:
-                                    //change admin password
                                     AD.changePassword(AD.getAdmin(adminSessionId));
                                     break;
                                 case 3:
@@ -227,17 +231,26 @@ public class Library {
                                     break;
                                 case 7:
                                     //view user's profile
+                                    //have to add security measures
                                     int id = UIM.getId();
                                     UD.getUser(id).printInfo();
                                     break;
                                 case 8:
-                                    //remove user
+                                    //delete user 
+                                    //have to add security measures
                                     UD.removeUser(UIM.getId());
                                     System.out.println("User has been removed.");
                                     break;
                                 case 9:
-                                    //view loans and fees
+                                        
+                                    
+                                     for (int i = 0; i < user.bookList.size(); i++) {
+                                        System.out.print("Book " + i + ": " + user.bookList.get(i).name + "\t Fine : ");
+                                        user.bookList.get(i).computeFine(now);
+                                        System.out.println();
+                                    }
                                     break;
+                                   
                                 case 0:
                                     System.out.println("Exiting admin session...");
                                     break;
