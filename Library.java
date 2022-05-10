@@ -31,15 +31,14 @@ public class Library {
         BD.addBook(new ComicBook("Marvel", "A", "B", 100, "ComicBook"));
 
         BD.addBook(new ComicBook("BestBook", "C", "D", 1100, "Documentary"));
-        BD.addBook(new Manga("frank", "E", "F", 1020, "Manga"));
-        BD.addBook(new Novel("kevin", "G", "H", 3100, "Novel"));
-        BD.addBook(new Novel("samuel", "samuel", "samuel", -100, "Novel"));
-        BD.addBook(new Documentary("com", "I", "J", 0, "Documentary"));
-        BD.addBook(new Manga("asd", "K", "L", 400, "Manga"));
-        BD.addBook(new Manga("pop", "M", "N", 129, "Manga"));
+        BD.addBook(new ComicBook("frank", "E", "F", 1020, "Manga"));
+        BD.addBook(new ComicBook("kevin", "G", "H", 3100, "Novel"));
+        BD.addBook(new ComicBook("samuel", "samuel", "samuel", -100, "Novel"));
+        BD.addBook(new ComicBook("com", "I", "J", 0, "Documentary"));
+        BD.addBook(new ComicBook("asd", "K", "L", 400, "Manga"));
+        BD.addBook(new ComicBook("pop", "M", "N", 129, "Manga"));
         BD.addBook(new ComicBook("hey", "O", "P", 100, "Comicbook"));
 
-        
         do {
             boolean success = false;
             while (!success) {
@@ -81,17 +80,17 @@ public class Library {
                                 case 3:
 
                                     Book b = BD.getBook(UIM.getBookId());
-                                    while (b.equals(null)) {                                        
+                                    while (b.equals(null)) {
                                         b = BD.getBook(UIM.getBookId());
                                     }
-                                        user.borrowBook(b);
-                                        user.printReceipt();
-                                        Thread.sleep(100);
+                                    user.borrowBook(b);
+                                    user.printReceipt();
+                                    Thread.sleep(100);
 
                                     break;
                                 case 4:
                                     user.removeBorrowedBook(BD.bookData.get(UIM.getBookId()));
-                                    
+
                                     break;
                                 case 5:
                                     //search a book
@@ -114,29 +113,41 @@ public class Library {
                                     //view all books and sort them
                                     BD.printBooks(BD.bookData);
                                     int sortOption = UIM.sortingOption();
-                                    do {                                        
-                                        switch(sortOption){
+                                    do {
+                                        switch (sortOption) {
                                             case 1:
                                                 System.out.println("Sorting by name of the book");
-                                                BD.sortbyName();
+                                                System.out.println(BD.bubbleSort(BD.getBookData(), new Comparator<Book>() {
+                                                    @Override
+                                                    public int compare(Book o1, Book o2) {
+                                                        return o1.getName().compareTo(o2.getName());
+                                                    }
+                                                }));
                                                 break;
                                             case 2:
                                                 System.out.println("Sorting by year");
-                                                BD.sortByYear();
+                                                System.out.println(BD.bubbleSort(BD.getBookData(), new Comparator<Book>() {
+                                                    @Override
+                                                    public int compare(Book o1, Book o2) {
+                                                        return Integer.compare(o1.getYear(), o2.getYear());
+                                                    }
+                                                })
+                                                );
                                                 break;
                                             case 0:
                                                 System.out.println("Exiting book list...");
                                                 break;
                                             default:
-                                                System.out.println("Invalid input. Please input numbers between 0 and 2.");  
-                                                break;                                        }
-                                    } while ((sortOption = UIM.sortingOption()) != 0); 
+                                                System.out.println("Invalid input. Please input numbers between 0 and 2.");
+                                                break;
+                                        }
+                                    } while ((sortOption = UIM.sortingOption()) != 0);
                                     break;
-                                    
+
                                 case 7:
                                     // view and pay fees 
                                     user.displpayFines(now);
-                                    
+
                                     break;
 
                                 case 8: //compute fine testing for exam
@@ -225,7 +236,7 @@ public class Library {
                                     //display a user's fines    
                                     UD.getUser(UIM.getId()).displpayFines(now);
                                     break;
-                                   
+
                                 case 0:
                                     System.out.println("Exiting admin session...");
                                     break;

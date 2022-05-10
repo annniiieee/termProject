@@ -1,11 +1,20 @@
 package library;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 public class BookDataBase implements iAdminRights, Database {
 
     Map<Integer, Book> bookData = new LinkedHashMap<>();
+
+    public Map<Integer, Book> getBookData() {
+        return bookData;
+    }
+
+    public void setBookData(Map<Integer, Book> bookData) {
+        this.bookData = bookData;
+    }
 
     @Override
     public void addBook(Book book) {
@@ -41,6 +50,7 @@ public class BookDataBase implements iAdminRights, Database {
                 System.out.print(j++ + "- ");
                 entry.getValue().printBook();
             }
+            System.out.println();
         }
     }
 
@@ -58,27 +68,63 @@ public class BookDataBase implements iAdminRights, Database {
         );
     }
 
-    public Book getBook(int id){
+    public Book getBook(int id) {
         if (bookData.containsKey(id)) {
             return bookData.get(id);
-        }
-        else{
+        } else {
             System.out.println("id does not correspod to any existing book");
             return getBook(id);
         }
     }
-    
-    public void sortbyName(){
-        Map<Integer, Book> cloneBookData = new HashMap<>();
-        List<Book> l = new LinkedList<>(bookData.values());
-        Collections.sort(l, new sortBookByNameComparator());
-        
-        for (int i = 0; i < l.size(); i++) {
-            l.get(i).printBook();
+
+    public <T> List<T> bubbleSort(
+            Map<Integer, T> map,
+            Comparator<T> comparator) {
+
+        List<Entry<Integer, T>> entry = new ArrayList<>(map.entrySet());
+       
+
+        for (int i = 0; i < entry.size(); i++) {
+
+            for (int j = 0; j < entry.size() - 1; j++) {
+
+                if (comparator.compare(entry.get(j).getValue(), entry.get(j + 1).getValue()) > 0) {
+
+                    Entry<Integer, T> temporary = entry.get(j);
+                    entry.set(j, entry.get(j+1));
+                    entry.set(j + 1, temporary);
+
+                }
+
+            }
+
         }
+
+        ArrayList<T> answer = new ArrayList<>();
+        for (int i = 0; i < entry.size(); i++) {
+            answer.add(entry.get(i).getValue());
+        }
+        return answer;
     }
-    
-    public void sortByYear(){
-        
+
+    public static void main(String[] args) {
+
+        BookDataBase bd = new BookDataBase();
+        HashMap<Integer, Integer> hashmap = new HashMap();
+        hashmap.put(1, 2);
+        hashmap.put(11, 2);
+        hashmap.put(12, 27);
+        hashmap.put(13, 22);
+        hashmap.put(18, 24);
+        hashmap.put(185, 4562);
+
+        System.out.println(bd.bubbleSort(hashmap, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return Integer.compare(o1, o2);
+            }
+        }));
+
     }
+
 }
