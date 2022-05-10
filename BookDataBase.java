@@ -3,7 +3,7 @@ package library;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class BookDataBase implements iAdminRights {
+public class BookDataBase implements iAdminRights, Database {
 
     Map<Integer, Book> bookData = new LinkedHashMap<>();
 
@@ -31,6 +31,15 @@ public class BookDataBase implements iAdminRights {
         }
     }
 
+    public boolean checkBookExistence(Book b){
+        if (bookData.containsValue(b)) {
+            return true; 
+            
+        }
+        else {
+            return false; 
+        }
+    }
     public void printBooks() {
         if (bookData.isEmpty()) {
             System.out.println("Empty book list.");
