@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author Admin
  */
-public class UserDatabase extends Database{
+public class UserDatabase {
     private HashMap<Integer, User> h = new HashMap<>();        
 
     public UserDatabase() {
