@@ -13,7 +13,7 @@ import java.util.Scanner;
  *
  * @author Admin
  */
-public class AdminDatabase implements Database {
+public class AdminDatabase extends Database {
     private HashMap<Integer, Admin> h = new HashMap<>();
 
     public AdminDatabase() {

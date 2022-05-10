@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-public class BookDataBase implements iAdminRights, Database {
+public class BookDataBase extends Database implements iAdminRights {
 
     Map<Integer, Book> bookData = new LinkedHashMap<>();
 
