@@ -10,7 +10,7 @@ public abstract class Book {
     public int year;
     public static int counter;
     public int bookId;
-    private final LocalDate dateBorrowed = LocalDate.now();
+    private LocalDate dateBorrowed;
     private LocalDate dateReturned; 
     public int fine;
 
@@ -22,6 +22,10 @@ public abstract class Book {
         this.dateReturned = dateReturned;
     }
 
+     public void setDateBorrowed(LocalDate dateBorrowed) {
+        this.dateBorrowed = dateBorrowed;
+    }
+     
     public LocalDate getDateBorrowed() {
         return dateBorrowed;
     }
