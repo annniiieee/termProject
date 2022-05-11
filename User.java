@@ -5,11 +5,7 @@
  */
 package library;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -109,7 +105,7 @@ public class User extends People {
             book.setAvailable(false);
             bookList.add(book);
             System.out.println("Succesfully borrowed");
-            book.setDateBorrowed(LocalDate.now());
+            book.getDateBorrowed();
         } else {
             System.err.println("Book not available");
         }

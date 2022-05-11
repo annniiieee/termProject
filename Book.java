@@ -10,7 +10,7 @@ public abstract class Book {
     public int year;
     public static int counter;
     public int bookId;
-    private LocalDate dateBorrowed;
+    private final LocalDate dateBorrowed = LocalDate.now();
     private LocalDate dateReturned; 
     public int fine;
 
@@ -41,10 +41,6 @@ public abstract class Book {
 
     public boolean isAvailable() {
         return available;
-    }
-
-    public void setDateBorrowed(LocalDate dateBorrowed) {
-        this.dateBorrowed = dateBorrowed;
     }
 
     
@@ -154,6 +150,7 @@ public abstract class Book {
         this.year = year;
         this.genre = genre;
         counter++;
+        
         
 
         this.keyword = new String[]{name, author, publisher, String.valueOf(year), genre};
