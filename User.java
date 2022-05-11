@@ -105,7 +105,8 @@ public class User extends People {
             book.setAvailable(false);
             bookList.add(book);
             System.out.println("Succesfully borrowed");
-            book.getDateBorrowed();
+            book.setDateBorrowed(LocalDate.now());
+            book.getDateBorrowed(); 
         } else {
             System.err.println("Book not available");
         }
