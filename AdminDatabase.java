@@ -46,7 +46,7 @@ public class AdminDatabase {
     public boolean checkLoginCredentials(int userId){
         UserInputManager UIM = new UserInputManager();
         while (!checkIdExistence(userId, h)) {            
-            System.out.println("Invalid user id. Please enter a valid id, or enter 0 to exit the process");
+            System.out.println("Invalid admin id. Please enter a valid id, or enter 0 to exit the process");
             userId = UIM.getId();
             if (userId == 0) {
                 return false;

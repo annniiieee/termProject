@@ -74,25 +74,30 @@ public class UserDatabase {
 
     public boolean checkLoginCredentials(int userId){
         UserInputManager UIM = new UserInputManager();
-        while (!checkIdExistence(userId)) {            
-            System.out.println("Invalid user id. Please enter a valid id, or enter 0 to exit the process");
-            userId = UIM.getId();
-            if (userId == 0) {
-                return false;
-            }
+        if (userId == 0) {
+            return false;
         }
-        String s = UIM.getPassWord();
-        while (!checkPasswordInput(s, userId)) {            
-            System.out.println("Invalid password. Please enter a valid password, or enter 0 to exit the process");
-            s = UIM.getPassWord();
-            if (s.equals("0")) {
-                return false;
-            }            
+        else{
+            while (!checkIdExistence(userId)) {            
+                System.out.println("Invalid user id. Please enter a valid id, or enter 0 to exit the process");
+                userId = UIM.getId();
+                if (userId == 0) {
+                    return false;
+                }
+            }
+            String s = UIM.getPassWord();
+            while (!checkPasswordInput(s, userId)) {            
+                System.out.println("Invalid password. Please enter a valid password, or enter 0 to exit the process");
+                s = UIM.getPassWord();
+                if (s.equals("0")) {
+                    return false;
+                }            
+            }        
         }
         return true;
     }
     
-     public void printUsers(HashMap<Integer, User> h) {
+     public void printUsers() {
         if (h.isEmpty()) {
             System.out.println("Empty user list.");
         } else {

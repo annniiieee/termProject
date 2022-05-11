@@ -79,19 +79,26 @@ public class Library {
                                 case 3:
                                     //allow to exit the system by pressing on 0
                                     // catch exception when the book has already been borrowed 
-                                    Book b = BD.getBook(UIM.getBookId());
-                                    while (b.equals(null)) {
-                                        b = BD.getBook(UIM.getBookId());
+                                    int bookId = UIM.getBookId();
+                                    if (BD.checkBookCredentials(bookId)) {
+                                        Book b = BD.getBook(bookId);    
+                                        user.borrowBook(b);
+                                        user.printReceipt();                                        
                                     }
-                                    user.borrowBook(b);
-                                    user.printReceipt();
                                     Thread.sleep(100);
 
                                     break;
 
                                 case 4:
-                                    user.removeBorrowedBook(BD.bookData.get(UIM.getBookId()));
-
+                                    if (!user.getBookList().isEmpty()) {
+                                        int bookId2 = UIM.getBookId();
+                                        if (BD.checkBookCredentials(bookId2)) {
+                                            user.removeBorrowedBook(BD.bookData.get(bookId2));                                        
+                                        }                                        
+                                    }
+                                    else{
+                                        System.out.println("You have not borrowed any books yet.");
+                                    }
                                     break;
                                 case 5:
                                     //search a book
@@ -185,9 +192,11 @@ public class Library {
                             }
                             switch (adminOption) {
                                 case 1:
+                                    //view admin profile
                                     AD.getAdmin(adminSessionId).printInfo();
                                     break;
                                 case 2:
+                                    //change password
                                     AD.changePassword(AD.getAdmin(adminSessionId));
                                     break;
                                 case 3:
@@ -226,17 +235,25 @@ public class Library {
                                     break;
                                 case 7:
                                     //view user's profile
-                                    UD.printUsers(UD.h);
-                                    int id = UIM.getId();
-                                    UD.getUser(id).printInfo();
+                                    UD.printUsers();
+                                    int id = UIM.getUserId();
+                                    if (UD.checkIdExistence(id)) {
+                                        UD.getUser(id).printInfo();                                    
+                                    }
                                     break;
                                 case 8:
                                     //delete user 
                                     UD.removeUser(UIM.getId());
                                     break;
                                 case 9:
-                                    //display a user's fines    
-                                    UD.getUser(UIM.getId()).displpayFines(now);
+                                    //display a user's fines
+                                    int userIdtoCheck = UIM.getId();
+                                    if (UD.checkIdExistence(userIdtoCheck)) {
+                                        UD.getUser(userIdtoCheck).displpayFines(now);                                        
+                                    }
+                                    else{
+                                        System.out.println("No user wuth that id found.");
+                                    }
                                     break;
 
                                 case 0:

@@ -20,7 +20,20 @@ public class UserInputManager {
         try {
             a = sc.nextInt();
         } catch (Exception e) {
-            System.out.println("Invalid Id. Please input a number.");
+            System.out.println("Invalid Id. Please input a number, or press 0 to exit.");
+            a = getId();
+        }
+        return a;
+    }
+
+    public int getUserId() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("What is the id of the user that you're trying to view? ");
+        int a = 0;
+        try {
+            a = sc.nextInt();
+        } catch (Exception e) {
+            System.out.println("Invalid Id. Please input a number, or press 0 to exit.");
             a = getId();
         }
         return a;
@@ -28,12 +41,12 @@ public class UserInputManager {
 
     public int getBookId() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Id of the book : ");
+        System.out.print("Please enter the Id of the book. If you wish to exit, please enter 0.");
         int a;
         try {
             a = sc.nextInt();
         } catch (Exception e) {
-            System.out.println("Invalid Id. Please input a number.");
+            System.out.println("Invalid Id. Please input a number, or press 0 to exit the process.");
             a = getId();
         }
         return a;

@@ -29,7 +29,7 @@ public class User extends People {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -37,7 +37,7 @@ public class User extends People {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -45,7 +45,7 @@ public class User extends People {
     }
 
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     public void setLastName(String lastName) {
@@ -53,7 +53,7 @@ public class User extends People {
     }
 
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     public void setFirstName(String firstName) {
@@ -61,14 +61,27 @@ public class User extends People {
     }
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
 
     public void setAddress(String address) {
         this.address = address;
     }
 
+    public ArrayList<Book> getBookList() {
+        return this.bookList;
+    }
+
+    public void setBookList(ArrayList<Book> bookList) {
+        this.bookList = bookList;
+    }
+
+    
+    
     public void displpayFines(LocalDate now) {
+        if (bookList.isEmpty()) {
+            System.out.println("User has not borrowed books yet.");
+        }
         for (int i = 0; i < bookList.size(); i++) {
             System.out.print("Book ID" + bookList.get(i).bookId + ": " + bookList.get(i).name + "\t Fine : ");
             bookList.get(i).computeFine(now);
@@ -88,7 +101,7 @@ public class User extends People {
             b.setAvailable(true);
         } else {
             System.err.println("You have not borrowed this book");
-        }
+        }        
     }
 
     public void borrowBook(Book book) {
