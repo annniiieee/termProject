@@ -44,6 +44,16 @@ public class BookDataBase implements iAdminRights {
         }
     }
 
+    //method overloading purposes 
+    public boolean checkBookExistence(Book b) {
+        if (bookData.containsValue(b)) {
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
     public void printBooks(Map<Integer, Book> bookData) {
         if (bookData.isEmpty()) {
             System.out.println("Empty book list.");
@@ -77,7 +87,7 @@ public class BookDataBase implements iAdminRights {
             return bookData.get(id);
 
         }
-        return null; 
+        return null;
     }
 
     public <T> void bubbleSort(
@@ -87,21 +97,15 @@ public class BookDataBase implements iAdminRights {
         List<Entry<Integer, T>> entry = new ArrayList<>(map.entrySet());
 
         for (int i = 0; i < entry.size(); i++) {
-
             for (int j = 0; j < entry.size() - 1; j++) {
-
                 if (comparator.compare(entry.get(j).getValue(), entry.get(j + 1).getValue()) > 0) {
 
                     Entry<Integer, T> temporary = entry.get(j);
                     entry.set(j, entry.get(j + 1));
                     entry.set(j + 1, temporary);
-
                 }
-
             }
-
         }
-
         ArrayList<T> answer = new ArrayList<>();
         for (int i = 0; i < entry.size(); i++) {
             System.out.println(entry.get(i).getValue());

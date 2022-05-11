@@ -77,6 +77,8 @@ public class Library {
                                     UD.changePassword(UD.getUser(userSessionId));
                                     break;
                                 case 3:
+                                    //allow to exit the system by pressing on 0
+                                    // catch exception when the book has already been borrowed 
                                     Book b = BD.getBook(UIM.getBookId());
                                     while (b.equals(null)) {
                                         b = BD.getBook(UIM.getBookId());
