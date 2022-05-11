@@ -62,6 +62,7 @@ public class UserDatabase {
             return true;
         }
         else
+            System.out.println("The user is non-existent");
             return false;
     }
     

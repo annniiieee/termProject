@@ -123,7 +123,7 @@ public class UserInputManager {
 
     public String getPassWord() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("PLease input password: ");
+        System.out.print("Please input password: ");
         return sc.nextLine();
     }
 

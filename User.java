@@ -78,12 +78,12 @@ public class User extends People {
 
     
     
-    public void displpayFines(LocalDate now) {
+    public void displayFines(LocalDate now) {
         if (bookList.isEmpty()) {
             System.out.println("User has not borrowed books yet.");
         }
         for (int i = 0; i < bookList.size(); i++) {
-            System.out.print("Book ID" + bookList.get(i).bookId + ": " + bookList.get(i).name + "\t Fine : ");
+            System.out.print("Book ID: " + bookList.get(i).bookId + " \t Title: " + bookList.get(i).name + "\t Fine : ");
             bookList.get(i).computeFine(now);
             System.out.println();
         }
@@ -124,31 +124,6 @@ public class User extends People {
         try {
             Thread.sleep(2000);
         } catch (InterruptedException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void printReceipt() {
-        System.out.println("Check receipt.txt for your receipt!");
-        FileWriter fw;
-        SimpleDateFormat sdf = new SimpleDateFormat();
-        try {
-            fw = new FileWriter("C:\\Users\\nguye\\OneDrive - Vanier College\\Documents\\receipt.txt");
-            fw.write(
-                    "Thanks for borrowing books at library inc.\n"
-                    + "Here's your receipt:\n"
-            );
-            for (int i = 0; i < bookList.size(); i++) {
-                fw.write(String.valueOf(bookList.get(i)));
-                fw.write(
-                        bookList.get(i).getDateBorrowed().plusDays(14).toString()
-                );
-                fw.write("\n");
-            }
-            
-
-            fw.flush();
-        } catch (IOException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

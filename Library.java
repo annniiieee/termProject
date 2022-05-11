@@ -1,9 +1,13 @@
 package library;
 
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -75,17 +79,40 @@ public class Library {
 
                                 case 2:
                                     UD.changePassword(UD.getUser(userSessionId));
+                                    Thread.sleep(100);
                                     break;
                                 case 3:
                                     //allow to exit the system by pressing on 0
                                     // catch exception when the book has already been borrowed 
                                     int bookId = UIM.getBookId();
                                     if (BD.checkBookCredentials(bookId)) {
-                                        Book b = BD.getBook(bookId);    
+                                        Book b = BD.getBook(bookId);
                                         user.borrowBook(b);
-                                        user.printReceipt();                                        
+                                        System.out.println("Check receipt.txt for your receipt!");
+                                        FileWriter fw;
+                                        SimpleDateFormat sdf = new SimpleDateFormat();
+                                        try {
+                                            fw = new FileWriter("C:\\Users\\nguye\\OneDrive - Vanier College\\Documents\\receipt.txt");
+                                            fw.write(
+                                                    "Thanks for borrowing books at library inc.\n"
+                                                    + "Here's your receipt:\n"
+                                            );
+                                            for (int i = 0; i < user.bookList.size(); i++) {
+                                                fw.write(String.valueOf(user.bookList.get(i)));
+                                                fw.write(
+                                                        "\nDate to be returned: "
+                                                        + user.bookList.get(i).getDateBorrowed().plusDays(14).toString()
+                                                );
+                                                        fw.write("\nFine: " + user.bookList.get(i).computeFine(now));
+                                                
+                                                fw.write("\n");
+                                            }
+
+                                            fw.flush();
+                                        } catch (IOException ex) {
+                                            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                                        }
                                     }
-                                    Thread.sleep(100);
 
                                     break;
 
@@ -93,12 +120,12 @@ public class Library {
                                     if (!user.getBookList().isEmpty()) {
                                         int bookId2 = UIM.getBookId();
                                         if (BD.checkBookCredentials(bookId2)) {
-                                            user.removeBorrowedBook(BD.bookData.get(bookId2));                                        
-                                        }                                        
-                                    }
-                                    else{
+                                            user.removeBorrowedBook(BD.bookData.get(bookId2));
+                                        }
+                                    } else {
                                         System.out.println("You have not borrowed any books yet.");
                                     }
+
                                     break;
                                 case 5:
                                     //search a book
@@ -131,6 +158,7 @@ public class Library {
                                                         return o1.getName().toLowerCase().compareTo(o2.getName().toLowerCase());
                                                     }
                                                 });
+                                                Thread.sleep(100);
                                                 break;
                                             case 2:
                                                 System.out.println("Sorting by year");
@@ -141,12 +169,15 @@ public class Library {
                                                     }
                                                 }
                                                 );
+                                                Thread.sleep(100);
                                                 break;
                                             case 0:
                                                 System.out.println("Exiting book list...");
+                                                Thread.sleep(100);
                                                 break;
                                             default:
                                                 System.out.println("Invalid input. Please input numbers between 0 and 2.");
+                                                Thread.sleep(100);
                                                 break;
                                         }
                                     } while ((sortOption = UIM.sortingOption()) != 0);
@@ -154,21 +185,23 @@ public class Library {
 
                                 case 7:
                                     // view and pay fees 
-                                    user.displpayFines(now);
+                                    user.displayFines(now);
+                                    Thread.sleep(100);
 
                                     break;
 
                                 case 8: //compute fine testing for exam
                                     System.out.println("The number of days you want to skip");
                                     now = now.plusDays(sc.nextInt());
-
+                                    Thread.sleep(100);
                                     break;
                                 case 0:
                                     System.out.println("Exiting user session...");
+                                    Thread.sleep(100);
                                     break;
                                 default:
                                     System.out.println("Invalid option. Please input a number between 0 and 7.");
-
+                                    Thread.sleep(100);
                                     break;
                             }
                         } while (userOption != 0);
@@ -189,15 +222,18 @@ public class Library {
                                 } catch (Exception e) {
                                     System.out.println("Please input a number.");
                                 }
+
                             }
                             switch (adminOption) {
                                 case 1:
                                     //view admin profile
                                     AD.getAdmin(adminSessionId).printInfo();
+                                    Thread.sleep(100);
                                     break;
                                 case 2:
                                     //change password
                                     AD.changePassword(AD.getAdmin(adminSessionId));
+                                    Thread.sleep(100);
                                     break;
                                 case 3:
                                     //search for a book
@@ -232,35 +268,38 @@ public class Library {
                                 case 6:
                                     //view books
                                     BD.printBooks(BD.bookData);
+                                    Thread.sleep(100);
                                     break;
                                 case 7:
                                     //view user's profile
                                     UD.printUsers();
                                     int id = UIM.getUserId();
                                     if (UD.checkIdExistence(id)) {
-                                        UD.getUser(id).printInfo();                                    
+                                        UD.getUser(id).printInfo();
                                     }
+                                    Thread.sleep(100);
                                     break;
                                 case 8:
                                     //delete user 
                                     UD.removeUser(UIM.getId());
+                                    Thread.sleep(100);
                                     break;
                                 case 9:
                                     //display a user's fines
                                     int userIdtoCheck = UIM.getId();
                                     if (UD.checkIdExistence(userIdtoCheck)) {
-                                        UD.getUser(userIdtoCheck).displpayFines(now);                                        
+                                        UD.getUser(userIdtoCheck).displayFines(now);
                                     }
-                                    else{
-                                        System.out.println("No user wuth that id found.");
-                                    }
+
                                     break;
 
                                 case 0:
                                     System.out.println("Exiting admin session...");
+                                    Thread.sleep(100);
                                     break;
                                 default:
                                     System.out.println("Invalid option. Please input a number between 0 and 8.");
+                                    Thread.sleep(100);
                                     break;
                             }
                         } while (adminOption != 0);
@@ -272,12 +311,14 @@ public class Library {
                     UD.addUser(u);
                     System.out.println("User created!");
                     u.printInfo();
+
                     break;
                 case 4:
                     Admin a = UIM.createAdmin();
                     AD.addAdmin(a);
                     System.out.println("Admin created!");
                     a.printInfo();
+
                     break;
                 case 0:
                     System.out.println("Thank you for using library inc.! ");
