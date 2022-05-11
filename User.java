@@ -70,7 +70,7 @@ public class User extends People {
 
     public void displpayFines(LocalDate now) {
         for (int i = 0; i < bookList.size(); i++) {
-            System.out.print("Book " + (i + 1) + ": " + bookList.get(i).name + "\t Fine : ");
+            System.out.print("Book ID" + bookList.get(i).bookId + ": " + bookList.get(i).name + "\t Fine : ");
             bookList.get(i).computeFine(now);
             System.out.println();
         }
@@ -120,7 +120,7 @@ public class User extends People {
         FileWriter fw;
         SimpleDateFormat sdf = new SimpleDateFormat();
         try {
-            fw = new FileWriter("C:\\Users\\2156116\\Documents\\receipt.txt");
+            fw = new FileWriter("C:\\Users\\nguye\\OneDrive - Vanier College\\Documents\\receipt.txt");
             fw.write(
                     "Thanks for borrowing books at library inc.\n"
                     + "Here's your receipt:\n"
