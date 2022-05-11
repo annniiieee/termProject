@@ -75,13 +75,9 @@ public class BookDataBase implements iAdminRights {
     public Book getBook(int id) {
         if (bookData.containsKey(id)) {
             return bookData.get(id);
-        } else {
-            System.out.println("id does not correspond to any existing book");
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Enter a valid Id");
-            return getBook(sc.nextInt());
 
         }
+        return null; 
     }
 
     public <T> void bubbleSort(

@@ -1,7 +1,6 @@
 package library;
 
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.*;
 import java.util.*;
@@ -78,7 +77,6 @@ public class Library {
                                     UD.changePassword(UD.getUser(userSessionId));
                                     break;
                                 case 3:
-
                                     Book b = BD.getBook(UIM.getBookId());
                                     while (b.equals(null)) {
                                         b = BD.getBook(UIM.getBookId());
@@ -88,6 +86,7 @@ public class Library {
                                     Thread.sleep(100);
 
                                     break;
+
                                 case 4:
                                     user.removeBorrowedBook(BD.bookData.get(UIM.getBookId()));
 
@@ -216,7 +215,7 @@ public class Library {
                                     break;
                                 case 5: //delete a book
                                     BD.removeBook(UIM.getBookId());
-                                   
+
                                     Thread.sleep(100);
                                     break;
                                 case 6:
@@ -225,6 +224,7 @@ public class Library {
                                     break;
                                 case 7:
                                     //view user's profile
+                                    UD.printUsers(UD.h);
                                     int id = UIM.getId();
                                     UD.getUser(id).printInfo();
                                     break;

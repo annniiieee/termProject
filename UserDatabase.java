@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @author Admin
  */
 public class UserDatabase {
-    private HashMap<Integer, User> h = new HashMap<>();        
+    public HashMap<Integer, User> h = new HashMap<>();        
 
     public UserDatabase() {
     HashMap<Integer, User> h = this.h;
@@ -90,5 +90,18 @@ public class UserDatabase {
             }            
         }
         return true;
-    }   
+    }
+    
+     public void printUsers(HashMap<Integer, User> h) {
+        if (h.isEmpty()) {
+            System.out.println("Empty user list.");
+        } else {
+            System.out.println("The user list: ");
+            for (Map.Entry<Integer, User> entry : h.entrySet()) {
+                //System.out.print(j++ + "- ");
+                entry.getValue().printUser();
+            }
+            System.out.println();
+        }
+    }
 }

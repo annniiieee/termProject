@@ -139,4 +139,10 @@ public class User extends People {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+      public void printUser() {
+        System.out.println(getId() + ": " 
+               + getFirstName()+ ", " + getLastName());
+              
+    }
 }
