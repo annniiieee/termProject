@@ -29,7 +29,7 @@ public abstract class Book {
     public String fineStatus;
     public boolean available = true;
 
-    public static String[] g = {"Manga", "Novel", "Comicbook", "Documentary"};
+    public final static String[] g = {"Manga", "Novel", "Comicbook", "Documentary"};
 
     public String[] getKeyword() {
         return keyword;
