@@ -142,7 +142,7 @@ public abstract class Book {
         );
 
         
-        System.out.println(timeDelta * finePerDay);
+       // System.out.println(timeDelta * finePerDay);
         return timeDelta * finePerDay;
         
     }
