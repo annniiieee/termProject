@@ -162,7 +162,7 @@ public class Library {
                                                 break;
                                             case 2:
                                                 System.out.println("Sorting by year");
-                                                BD.insertionSort(BD.getBookData());
+                                                BD.selectionSort(BD.getBookData());
                                                 Thread.sleep(100);
                                                 break;
                                             case 0:

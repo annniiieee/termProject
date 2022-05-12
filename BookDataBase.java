@@ -127,7 +127,7 @@ public class BookDataBase implements iAdminRights {
         }
     }
 
-    public void insertionSort (Map<Integer, Book> map) {
+    public void selectionSort (Map<Integer, Book> map) {
 
         List<Entry<Integer, Book>> entry = new ArrayList<>(map.entrySet());
 
