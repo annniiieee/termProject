@@ -162,13 +162,7 @@ public class Library {
                                                 break;
                                             case 2:
                                                 System.out.println("Sorting by year");
-                                                BD.bubbleSort(BD.getBookData(), new Comparator<Book>() {
-                                                    @Override
-                                                    public int compare(Book o1, Book o2) {
-                                                        return Integer.compare(o1.getYear(), o2.getYear());
-                                                    }
-                                                }
-                                                );
+                                                BD.insertionSort(BD.getBookData());
                                                 Thread.sleep(100);
                                                 break;
                                             case 0:

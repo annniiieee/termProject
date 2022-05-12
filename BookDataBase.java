@@ -107,9 +107,7 @@ public class BookDataBase implements iAdminRights {
         return true;
     }
     
-    public <T> void bubbleSort(
-            Map<Integer, T> map,
-            Comparator<T> comparator) {
+    public <T> void bubbleSort (Map<Integer, T> map, Comparator<T> comparator) {
 
         List<Entry<Integer, T>> entry = new ArrayList<>(map.entrySet());
 
@@ -127,7 +125,28 @@ public class BookDataBase implements iAdminRights {
         for (int i = 0; i < entry.size(); i++) {
             System.out.println(entry.get(i).getValue());
         }
-
     }
 
+    public void insertionSort (Map<Integer, Book> map) {
+
+        List<Entry<Integer, Book>> entry = new ArrayList<>(map.entrySet());
+
+        for (int i = 0; i < entry.size(); i++) {
+            Entry<Integer, Book> min = entry.get(i);
+            int minIndex = i;
+            for (int j = i+1; j < entry.size(); j++) {
+                if (entry.get(j).getValue().getYear() < min.getValue().getYear()) {
+                    min = entry.get(j);
+                    minIndex = j;
+                }
+            }
+            Entry<Integer, Book> temp = entry.get(i);
+            entry.set(i, min);
+            entry.set(minIndex, temp);
+        }
+        ArrayList<Book> answer = new ArrayList<>();
+        for (int i = 0; i < entry.size(); i++) {
+            System.out.println(entry.get(i).getValue());
+        }
+    }
 }
