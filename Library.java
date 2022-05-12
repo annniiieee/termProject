@@ -124,7 +124,7 @@ public class Library {
                                             BD.bookData.get(bookId2).setDateBorrowed(null);
                                         }
                                          else if (bookId2 != 0){
-                                        System.err.println("Invalid book Id. Please enter a valid book Id.");
+                                        System.out.println("Invalid book Id. Please enter a valid book Id.");
                                     }
 
                                     } else {
