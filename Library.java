@@ -20,6 +20,7 @@ public class Library {
      * @throws java.lang.InterruptedException
      */
     public static void main(String[] args) throws InterruptedException, IOException {
+
         FileOutputStream fout = new FileOutputStream("receipt.txt");
         // TODO code application logic here
         UserInputManager UIM = new UserInputManager();
@@ -82,50 +83,65 @@ public class Library {
                                     Thread.sleep(100);
                                     break;
                                 case 3:
+                                    //allow to exit the system by pressing on 0
+                                    // catch exception when the book has already been borrowed 
                                     int bookId = UIM.getBookId();
-                                    if (bookId > 0 && bookId <= BD.getBookData().keySet().size()) {
+                                    while (bookId != 0) {
                                         Book b = BD.getBook(bookId);
-                                        user.borrowBook(b);
-                                        FileWriter fw;
-                                        SimpleDateFormat sdf = new SimpleDateFormat();
-                                        try {
-                                            fw = new FileWriter("receipt.txt");
-                                            fw.write(
-                                                    "Thanks for borrowing books at library inc.\n"
-                                                    + "Here's your receipt:\n"
-                                            );
-                                            for (int i = 0; i < user.bookList.size(); i++) {
-                                                fw.write(String.valueOf(user.bookList.get(i)));
-                                                fw.write(
-                                                        "\nDate to be returned: "
-                                                        + user.bookList.get(i).getDateBorrowed().plusDays(14).toString()
-                                                );
-                                                        fw.write("\nFine: " + user.bookList.get(i).computeFine(now));
-                                                
-                                                fw.write("\n");
-                                            }
+                                        if (b != null) {
 
-                                            fw.flush();
-                                        } catch (IOException ex) {
-                                            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                                            user.borrowBook(b);
+                                            break;
+                                        } else {
+                                            System.err.println("Invalid book id.");
+                                            bookId = UIM.getBookId();
+
                                         }
                                     }
-                                    else if (bookId != 0){
-                                        System.err.println("Invalid book Id. Please enter a valid book Id.");
+                                    FileWriter fw;
+                                    SimpleDateFormat sdf = new SimpleDateFormat();
+                                    try {
+                                        fw = new FileWriter("receipt.txt");
+                                        fw.write(
+                                                "Thanks for borrowing books at library inc.\n"
+                                                + "Here's your receipt:\n"
+                                        );
+                                        for (int i = 0; i < user.bookList.size(); i++) {
+                                            fw.write(String.valueOf(user.bookList.get(i)));
+                                            fw.write(
+                                                    "\nDate to be returned: "
+                                                    + user.bookList.get(i).getDateBorrowed().plusDays(14).toString()
+                                            );
+                                            fw.write("\nFine: " + user.bookList.get(i).computeFine(now));
+
+                                            fw.write("\n");
+                                        }
+
+                                        fw.flush();
+                                    } catch (IOException ex) {
+                                        Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
                                     }
 
                                     break;
 
                                 case 4:
+
                                     if (!user.getBookList().isEmpty()) {
                                         int bookId2 = UIM.getBookId();
-                                        if (bookId2 > 0 && bookId2 <= BD.getBookData().keySet().size()) {
-                                            user.removeBorrowedBook(BD.bookData.get(bookId2));
-                                            BD.bookData.get(bookId2).setDateBorrowed(null);
+                                        Book b;
+                                        while (bookId2 != 0) {
+                                            b = BD.getBook(bookId2);
+                                            if (b != null) {
+
+                                                user.removeBorrowedBook(b);
+                                                b.setDateBorrowed(null);
+                                                break;
+                                            } else {
+                                                System.err.println("Invalid book id.");
+                                                bookId2 = UIM.getBookId();
+
+                                            }
                                         }
-                                         else if (bookId2 != 0){
-                                        System.out.println("Invalid book Id. Please enter a valid book Id.");
-                                    }
 
                                     } else {
                                         System.out.println("You have not borrowed any books yet.");
@@ -153,7 +169,7 @@ public class Library {
                                     //view all books and sort them
                                     BD.printBooks(BD.bookData);
                                     int sortOption;
-                                    while ((sortOption = UIM.sortingOption()) != 0) {                                        
+                                    while ((sortOption = UIM.sortingOption()) != 0) {
                                         switch (sortOption) {
                                             case 1:
                                                 System.out.println("Sorting by name of the book");
@@ -178,7 +194,7 @@ public class Library {
                                                 System.out.println("Invalid input. Please input numbers between 0 and 2.");
                                                 Thread.sleep(100);
                                                 break;
-                                        }                                        
+                                        }
                                     }
                                     break;
 
@@ -203,6 +219,7 @@ public class Library {
                                     Thread.sleep(100);
                                     break;
                             }
+
                         } while (userOption != 0);
 
                     }
@@ -327,7 +344,9 @@ public class Library {
                     mainMenuOption = UIM.displayLogInMainMenu();
                     break;
             }
-        } while (mainMenuOption != 0);
+
+        } while (mainMenuOption
+                != 0);
     }
 
 }

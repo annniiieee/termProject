@@ -13,6 +13,8 @@ import java.util.Scanner;
  */
 public class UserInputManager {
 
+   
+
     public int getId() {
         Scanner sc = new Scanner(System.in);
         System.out.print("What is your id? ");
@@ -41,13 +43,15 @@ public class UserInputManager {
 
     public int getBookId() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Please enter the Id of the book. If you wish to exit, please enter 0.");
+        System.out.println("Please enter the Id of the book. If you wish to exit, please enter 0.");
         int a;
         try {
             a = sc.nextInt();
+
         } catch (Exception e) {
+            sc.nextLine();
             System.out.println("Invalid Id. Please input a number, or press 0 to exit the process.");
-            a = getBookId();
+            return this.getBookId();
         }
         return a;
     }
@@ -247,8 +251,8 @@ public class UserInputManager {
                 + "\n0. Log out.");
         return sc.nextInt();
     }
-    
-    public int sortingOption(){
+
+    public int sortingOption() {
         int a = 0;
         try {
             Scanner sc = new Scanner(System.in);
@@ -256,7 +260,7 @@ public class UserInputManager {
                     + "\n1. Sort by name."
                     + "\n2. Sort by year."
                     + "\n0. Exit sorting system and book list."
-            );            
+            );
             a = sc.nextInt();
         } catch (Exception e) {
             System.err.println("Invalid input. Please input a number.");

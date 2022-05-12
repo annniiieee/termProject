@@ -170,7 +170,8 @@ public abstract class Book {
 
     @Override
     public String toString() {
-        return "Book {" + "Title: " + name + " | Author: " + author + " | Genre: " + genre + " | Publisher: " + publisher + " | Year: " + year + " | Book's Id: " + bookId + " | Date Borrowed: " + dateBorrowed + '}';
+        return "Book {"+ "Name: " + name + ", | Author: " + author + ", | Genre: " + genre + ", | Publisher: " + publisher + ", | Year: " + year + ", | BookId: " + bookId + ", | Date Borrowed: " + dateBorrowed + ", | Fine: " + fine + ", Fine Status: " + fineStatus + ", | Available: " + available + '}';
     }
 
+   
 }

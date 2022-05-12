@@ -90,21 +90,21 @@ public class BookDataBase implements iAdminRights {
         return null;
     }
 
-    public boolean checkBookCredentials(int id){
+    public int checkBookCredentials(int id){
         UserInputManager UIM = new UserInputManager();
         if (id == 0) {
-            return false;
+            return -1;
         }
         else{
             while (!checkBookExistence(id)) {            
                 System.out.println("Invalid book id. Please enter a valid id, or enter 0 to exit the process");
                 id = UIM.getBookId();
                 if (id == 0) {
-                    return false;
+                    return -1;
                 }
             }         
         }
-        return true;
+        return -1;
     }
     
     public <T> void bubbleSort (Map<Integer, T> map, Comparator<T> comparator) {
