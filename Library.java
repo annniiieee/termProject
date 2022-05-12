@@ -88,7 +88,6 @@ public class Library {
                                     if (BD.checkBookCredentials(bookId)) {
                                         Book b = BD.getBook(bookId);
                                         user.borrowBook(b);
-                                        System.out.println("Check receipt.txt for your receipt!");
                                         FileWriter fw;
                                         SimpleDateFormat sdf = new SimpleDateFormat();
                                         try {
@@ -121,6 +120,7 @@ public class Library {
                                         int bookId2 = UIM.getBookId();
                                         if (BD.checkBookCredentials(bookId2)) {
                                             user.removeBorrowedBook(BD.bookData.get(bookId2));
+                                            BD.bookData.get(bookId2).setDateBorrowed(null);
                                         }
                                     } else {
                                         System.out.println("You have not borrowed any books yet.");
@@ -129,9 +129,9 @@ public class Library {
                                     break;
                                 case 5:
                                     //search a book
-
+                                    Scanner scSearch = new Scanner(System.in);
                                     System.out.println("Enter a keyword: ");
-                                    String x = sc.nextLine();
+                                    String x = scSearch.nextLine();
                                     Map<Integer, Book> map = BD.search(x);
                                     if (map.isEmpty()) {
                                         System.out.println("No book was found");
@@ -147,8 +147,8 @@ public class Library {
                                 case 6:
                                     //view all books and sort them
                                     BD.printBooks(BD.bookData);
-                                    int sortOption = UIM.sortingOption();
-                                    do {
+                                    int sortOption;
+                                    while ((sortOption = UIM.sortingOption()) != 0) {                                        
                                         switch (sortOption) {
                                             case 1:
                                                 System.out.println("Sorting by name of the book");
@@ -173,8 +173,8 @@ public class Library {
                                                 System.out.println("Invalid input. Please input numbers between 0 and 2.");
                                                 Thread.sleep(100);
                                                 break;
-                                        }
-                                    } while ((sortOption = UIM.sortingOption()) != 0);
+                                        }                                        
+                                    }
                                     break;
 
                                 case 7:

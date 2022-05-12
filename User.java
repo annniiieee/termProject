@@ -79,8 +79,7 @@ public class User extends People {
             System.out.println("User has not borrowed books yet.");
         }
         for (int i = 0; i < bookList.size(); i++) {
-            System.out.print("Book ID: " + bookList.get(i).bookId + " \t Title: " + bookList.get(i).name + "\t Fine : ");
-            bookList.get(i).computeFine(now);
+            System.out.print("Book ID: " + bookList.get(i).bookId + " \t Title: " + bookList.get(i).name + "\t Fine : " + bookList.get(i).computeFine(now));
             System.out.println();
         }
     }
@@ -95,6 +94,7 @@ public class User extends People {
         if (exist) {
             bookList.remove(b);
             b.setAvailable(true);
+            System.out.println("Book returned.");
         } else {
             System.err.println("You have not borrowed this book");
         }        
@@ -107,7 +107,8 @@ public class User extends People {
             System.out.println("Succesfully borrowed");
             book.setDateBorrowed(LocalDate.now());
             book.getDateBorrowed(); 
-        } else {
+            System.out.println("Check receipt.txt for your receipt!");
+    } else {
             System.err.println("Book not available");
         }
     }

@@ -139,12 +139,12 @@ public abstract class Book {
         long timeDelta = Math.max(
                 0,
                 ChronoUnit.DAYS.between(dateBorrowed.plusDays(14), returned)
-        );
-
-        
-       // System.out.println(timeDelta * finePerDay);
-        return timeDelta * finePerDay;
-        
+        );        
+            //we decided to put a max fine of 2$ so that users won't get an insane fee after a long amount of time.
+            if (timeDelta * finePerDay > 2.00) {
+                return 2.00;
+            }
+        return timeDelta * finePerDay;        
     }
 
     public Book(String name, String author, String publisher, int year, String genre) {

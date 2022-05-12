@@ -47,7 +47,7 @@ public class UserInputManager {
             a = sc.nextInt();
         } catch (Exception e) {
             System.out.println("Invalid Id. Please input a number, or press 0 to exit the process.");
-            a = getId();
+            a = getBookId();
         }
         return a;
     }
