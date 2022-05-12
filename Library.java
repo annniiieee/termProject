@@ -85,7 +85,7 @@ public class Library {
                                     //allow to exit the system by pressing on 0
                                     // catch exception when the book has already been borrowed 
                                     int bookId = UIM.getBookId();
-                                    if (BD.checkBookCredentials(bookId)) {
+                                    if (bookId > 0 && bookId <= BD.getBookData().keySet().size()) {
                                         Book b = BD.getBook(bookId);
                                         user.borrowBook(b);
                                         FileWriter fw;
@@ -111,6 +111,9 @@ public class Library {
                                         } catch (IOException ex) {
                                             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
                                         }
+                                    }
+                                    else if (bookId != 0){
+                                        System.err.println("Invalid book Id. Please enter a valid book Id.");
                                     }
 
                                     break;
