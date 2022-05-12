@@ -82,8 +82,6 @@ public class Library {
                                     Thread.sleep(100);
                                     break;
                                 case 3:
-                                    //allow to exit the system by pressing on 0
-                                    // catch exception when the book has already been borrowed 
                                     int bookId = UIM.getBookId();
                                     if (bookId > 0 && bookId <= BD.getBookData().keySet().size()) {
                                         Book b = BD.getBook(bookId);
@@ -91,7 +89,7 @@ public class Library {
                                         FileWriter fw;
                                         SimpleDateFormat sdf = new SimpleDateFormat();
                                         try {
-                                            fw = new FileWriter("C:\\Users\\nguye\\OneDrive - Vanier College\\Documents\\receipt.txt");
+                                            fw = new FileWriter("receipt.txt");
                                             fw.write(
                                                     "Thanks for borrowing books at library inc.\n"
                                                     + "Here's your receipt:\n"
@@ -121,10 +119,14 @@ public class Library {
                                 case 4:
                                     if (!user.getBookList().isEmpty()) {
                                         int bookId2 = UIM.getBookId();
-                                        if (BD.checkBookCredentials(bookId2)) {
+                                        if (bookId2 > 0 && bookId2 <= BD.getBookData().keySet().size()) {
                                             user.removeBorrowedBook(BD.bookData.get(bookId2));
                                             BD.bookData.get(bookId2).setDateBorrowed(null);
                                         }
+                                         else if (bookId2 != 0){
+                                        System.err.println("Invalid book Id. Please enter a valid book Id.");
+                                    }
+
                                     } else {
                                         System.out.println("You have not borrowed any books yet.");
                                     }
